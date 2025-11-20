@@ -15,8 +15,10 @@ const Login = () => {
     // console.log(' Trying to sign in with Google')
     signInWithPopup(auth, Provider)
     .then(result =>{
-      // console.log(result);
+      console.log(result.user);
       toast(" You have successfully signed in with Google account");
+      
+
     })
     .catch(error=>{
       // console.log(error)
@@ -41,7 +43,7 @@ const Login = () => {
         signIn(email,password)
         .then(result=>{
           const user = result.user;
-          // console.log(user);
+          console.log(user);
           form.reset();
           toast("Login successful! Welcome back.");
           // if(!result.user.emailVerified){

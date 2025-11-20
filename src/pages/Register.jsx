@@ -14,6 +14,25 @@ const Register = () => {
       .then(result =>{
         // console.log(result);
         toast(" You have successfully signed in with Google account");
+
+        const newUser={
+        name: result.user.displayName,
+        email : result.user.email,
+        image: result.user.photoURL
+      }
+    //   create user in the database
+    fetch('http://localhost:3000/users',{
+        method: 'POST',
+        headers:{
+            'content-type':'application/json'
+        },
+        body: JSON.stringify(newUser)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        console.log("Data after user",data)
+    })
+
       })
       .catch(error=>{
         // console.log(error)
