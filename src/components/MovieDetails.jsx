@@ -9,6 +9,7 @@ import Footer from './Footer';
 const MovieDetails = () => {
     
     const findMovie=useLoaderData();
+    console.log(findMovie);
     
     
    

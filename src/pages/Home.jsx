@@ -1,9 +1,17 @@
 import React from 'react';
+import Counter from '../components/Counter';
+import { useLoaderData } from 'react-router';
 
 const Home = () => {
+    const data = useLoaderData();
+    // console.log(data);
+  
+    
+
     return (
+        
         <div>
-            <p>This is home</p>
+            <Counter data={data} ></Counter>
         </div>
     );
 };

@@ -14,6 +14,7 @@ import MyCollection from "../components/MyCollection";
 import AddMovie from "../components/AddMovie";
 import UpdateMovie from "../components/UpdateMovie";
 import MovieDetails from "../components/MovieDetails";
+
 // import PrivateRoute from "../provider/PrivateRoute";
 
 
@@ -25,10 +26,13 @@ const router = createBrowserRouter(
             element: <HomeLayout></HomeLayout>,
             children: [
                 {
+                    loader:()=>fetch("http://localhost:3000/movies"),
                     index: true,
+                    
                     path: "/",
                     element:<Home></Home>
                 }
+                
             ]
         },
         {
@@ -98,7 +102,10 @@ const router = createBrowserRouter(
     }
         ]
         
-    },
+    }
+    ,
+    
+    
    
    
     {
