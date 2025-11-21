@@ -1,5 +1,5 @@
 import React  from 'react';
-import { useLoaderData } from 'react-router';
+import {  useLoaderData } from 'react-router';
 import Movie from './Movie';
 
 const AllMovies = () => {
@@ -11,7 +11,10 @@ const AllMovies = () => {
             
                 {
                     data.map(movie=><Movie movie={movie}></Movie>)
+
+                    
                 }
+               
            
         </div>
             

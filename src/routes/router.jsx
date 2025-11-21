@@ -50,9 +50,13 @@ const router = createBrowserRouter(
     {
         loader:()=>fetch("http://localhost:3000/movies"),
         path:"/movies",
-        element:<AllMovies></AllMovies>,
-        children:[
-            {
+        element:<AllMovies></AllMovies>
+        
+           
+        
+
+    },
+     {
                 
                 path:"/movies/my-collection",
                 element:<MyCollection></MyCollection>
@@ -66,12 +70,11 @@ const router = createBrowserRouter(
                 element:<UpdateMovie></UpdateMovie>
             },
             {
-                path:"/movies/movie-details/:id",
+                loader:({params})=>fetch(`http://localhost:3000/movies/${params.id}`),
+                path:"/movies/:id",
+                // path:"/movies/movie_details",
                 element:<MovieDetails></MovieDetails>
             },
-        ]
-
-    },
     {
         path: "/quick",
         element: <QuickLinks></QuickLinks>,
