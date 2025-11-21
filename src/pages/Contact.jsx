@@ -12,7 +12,7 @@ const Contact = () => {
     >
       <h1 style={{ fontSize: "32px", marginBottom: "20px" }}>📩 Contact Us</h1>
 
-      {/* Contact Information */}
+     
       <div style={{ marginBottom: "30px" }}>
         <h2 style={{ fontSize: "22px", marginBottom: "10px" }}>1. Contact Information</h2>
         <p><strong>Email:</strong> support@filmfusionpro.com</p>
@@ -23,7 +23,7 @@ const Contact = () => {
         </p>
       </div>
 
-      {/* Support Hours */}
+     
       <div style={{ marginBottom: "30px" }}>
         <h2 style={{ fontSize: "22px", marginBottom: "10px" }}>2. Support Hours / Response Time</h2>
         <p>Our support team checks messages regularly throughout the day.</p>
@@ -31,7 +31,7 @@ const Contact = () => {
         <p>For urgent issues, please mention <strong>"Urgent"</strong> in your email subject so we can prioritize your request.</p>
       </div>
 
-      {/* Why Contact Us */}
+
       <div style={{ marginBottom: "30px" }}>
         <h2 style={{ fontSize: "22px", marginBottom: "10px" }}>3. Why You Should Contact Us</h2>
         <p>You can reach out to us for any kind of help, questions, or feedback. Feel free to contact us regarding:</p>

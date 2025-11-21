@@ -46,17 +46,12 @@ const Login = () => {
           console.log(user);
           form.reset();
           toast("Login successful! Welcome back.");
-          // if(!result.user.emailVerified){
-          //   alert (' Please verify your email address')
-
-          // }
+          
           navigate(`${location.state?location.state:"/"}`)
           
         })
         .catch((error) => {
          const errorCode = error.code;
-        // const errorMessage = error.message;
-        // alert(errorCode, errorMessage);
         setError(errorCode)
       });
   };

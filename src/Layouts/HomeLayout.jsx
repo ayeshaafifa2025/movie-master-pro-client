@@ -6,6 +6,7 @@ import AboutPlatform from '../components/AboutPlatform';
 
 
 
+
 const HomeLayout = () => {
     return (
         <div>
@@ -16,6 +17,7 @@ const HomeLayout = () => {
             </header>
             <main>
                 <AboutPlatform></AboutPlatform>
+               
             
                
                 <Outlet></Outlet>

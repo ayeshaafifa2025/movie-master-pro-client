@@ -96,10 +96,7 @@ setUser(user)
     });
 
     
-    // sendEmailVerification(result.user)
-    // .then(()=>{
-    //   alert('verify email address')
-    // })
+    
     
     
   })
