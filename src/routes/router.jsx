@@ -9,6 +9,11 @@ import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Terms from "../pages/Terms";
 import Privacy from "../pages/Privacy";
+import AllMovies from "../components/AllMovies";
+import MyCollection from "../components/MyCollection";
+import AddMovie from "../components/AddMovie";
+import UpdateMovie from "../components/UpdateMovie";
+import MovieDetails from "../components/MovieDetails";
 // import PrivateRoute from "../provider/PrivateRoute";
 
 
@@ -41,6 +46,31 @@ const router = createBrowserRouter(
     },
     
         ]
+    },
+    {
+        loader:()=>fetch("http://localhost:3000/movies"),
+        path:"/movies",
+        element:<AllMovies></AllMovies>,
+        children:[
+            {
+                
+                path:"/movies/my-collection",
+                element:<MyCollection></MyCollection>
+            },
+            {
+                path:"/movies/add",
+                element:<AddMovie></AddMovie>
+            },
+            {
+                path:"/movies/update/:id",
+                element:<UpdateMovie></UpdateMovie>
+            },
+            {
+                path:"/movies/movie-details/:id",
+                element:<MovieDetails></MovieDetails>
+            },
+        ]
+
     },
     {
         path: "/quick",

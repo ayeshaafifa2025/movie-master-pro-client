@@ -19,13 +19,7 @@ const AuthProvider = ({children}) => {
         return signInWithEmailAndPassword(auth,email,password);
     }
 
-    // const updateUser =(updatedData)=>{
-    //     return updateProfile(auth.currentUser,updatedData);
-
-    // };
-
-
-
+   
     const logOut=()=>{
         return signOut(auth);
     }
@@ -49,7 +43,7 @@ const AuthProvider = ({children}) => {
         signIn,
         loading,
         setLoading,
-        // updateUser,
+        
 
     }
     return (
