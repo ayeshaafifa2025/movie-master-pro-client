@@ -1,16 +1,37 @@
-# React + Vite
+1. Website Name: FilmFusion Pro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+2. Live Link: https://kaleidoscopic-dango-5a8c6f.netlify.app/
 
-Currently, two official plugins are available:
+3. About:Discover meaningful, family-friendly, and inspiring films from around the world. FilmFusion Pro helps you explore movies with clean details, safe content insights, and your own personalized collection — all in one place.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+4. Implemented Features:
 
-## React Compiler
+Dynamic Movie Carousel (Hero Section) – Featured movies dynamically fetched from the database and displayed using a responsive Swiper slider.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Top Rated Movies Section – Shows the top 5 highest-rated movies with posters, title, genre, and rating.
 
-## Expanding the ESLint configuration
+Recently Added Movies – Displays the 6 latest movies added to the system.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Static Genre Section – Lists all movie genres for easy navigation.
+
+Search Functionality – Global movie search to quickly find movies by title, genre, or year.
+
+User Authentication – Email/password login and registration, including Google OAuth integration.
+
+Protected Routes – Pages like /movies/add and /my-collection accessible only to logged-in users.
+
+CRUD Operations on Movies – Add, update, delete, and view movies with proper UI forms and validation.
+
+My Collection Page – Shows only the movies added by the logged-in user with quick edit/delete options.
+
+Responsive Design – Fully mobile, tablet, and desktop compatible layout.
+
+Animations for Better UX – Eye-soothing fade/slide animations implemented using AOS.
+
+Toast Notifications – Real-time feedback for all success/error actions during CRUD or login operations.
+
+Consistent UI Design – Uniform card sizes, heading styles, spacing, and button designs across the website.
+
+Theme Toggle – Light/Dark mode toggle for user-preferred viewing experience.
+
+Error Handling & 404 Page – React error boundaries and user-friendly 404 page implemented.

@@ -3,20 +3,19 @@ import {  useLoaderData } from 'react-router';
 import Movie from './Movie';
 import NavBar from './NavBar';
 import Footer from './Footer';
-import Genre from './Genre';
+
 
 const AllMovies = () => {
     const data= useLoaderData();
     console.log(data);
 
-      const allGenres =data.map(movie=>movie.genre);
-        const uniqueGenres=[...new Set(allGenres)];
+      
 
     return (
         <div>
             <NavBar></NavBar>
 
-            <Genre genres={uniqueGenres}></Genre>
+            
 
 
 
