@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import { Outlet } from 'react-router';
 import AboutPlatform from '../components/AboutPlatform';
 import Hero from '../components/Hero';
+import AnimationSection from '../components/AnimationSection';
 
 
 const heroPromise = fetch("http://localhost:3000/hero")
@@ -20,6 +21,7 @@ const HomeLayout = () => {
 
             </header>
             <main>
+                <AnimationSection></AnimationSection>
                 
                
             
