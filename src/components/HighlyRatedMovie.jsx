@@ -1,30 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const LatestMovie = ({Latest}) => {
-    const{_id,posterUrl,title,rating,genre,createdAt,
-language}= Latest;
+const HighlyRatedMovie = ({top}) => {
+    const{_id,posterUrl,title,rating,genre,
+language}=top;
+    
     return (
         <div>
             <div className="max-w-sm rounded overflow-hidden shadow-lg m-4 bg-white">
       <img
         className="w-full h-70 "
-        src={Latest.posterUrl
+        src={top.posterUrl
 }
-        alt={Latest.title
+        alt={top.title
 }
       />
       <div className="px-6 py-4">
-        <div className="font-bold text-xl text-red-500 mb-2">Movie Name:{Latest.title
+        <div className="font-bold text-xl text-red-500 mb-2">Movie Name:{top.title
 }</div>
-        <p className="text-gray-900 font-semibold mb-1">Category:{Latest.genre
+        <p className="text-gray-900 font-semibold mb-1">Category:{top.genre
 }</p>
-        <p className="text-yellow-500 mb-2">Rating: {Latest.rating} ⭐</p>
-        <p className="text-pink-600 mb-2">Language:{Latest.
+        <p className="text-yellow-500 mb-2">Rating: {top.rating} ⭐</p>
+        <p className="text-pink-600 mb-2">Language:{top.
 language}</p>
-        <p className="text-pink-600 mb-2">Added At:{Latest.createdAt
-}</p>
-
         <button
         
           
@@ -40,4 +38,4 @@ language}</p>
     );
 };
 
-export default LatestMovie;
+export default HighlyRatedMovie;
