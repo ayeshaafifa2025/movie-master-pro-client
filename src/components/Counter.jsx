@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { use } from 'react';
 
 
-const Counter = ({data}) => {
-    console.log(data);
+const Counter = ({data,userCountPromise}) => {
+    const data1= use(userCountPromise);
+    // console.log(data,data1);
   
    
    
@@ -16,7 +17,7 @@ const Counter = ({data}) => {
         <div className="rounded-md p-7 text-white h-[250px] bg-pink-600 flex flex-col items-center justify-center">
          
           <h2 className="font-bold text-[35px]">Total Users</h2>
-          <p className="font-semibold text-[26px]">0</p>
+          <p className="font-semibold text-[26px]">{data1.length}</p>
         </div>
         
       </div>
