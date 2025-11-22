@@ -84,7 +84,7 @@ return;
           navigate("/");
     
     const user = result.user;
-    // console.log(user);
+    console.log(user);
     form.reset();
     toast(" Registration successful");
     updateUser({displayName: name , photoURL:photoUrl }).then(()=>{

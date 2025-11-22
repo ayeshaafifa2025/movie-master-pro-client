@@ -2,7 +2,7 @@ import React from 'react';
 
 const AnimationSection = () => {
   const features = [
-    "100% Halal Movie Platform",
+    "40+ enjoyable movies",
     "Dynamic Search",
     "User-Friendly Interface",
     "Smooth Scrolling Animation",
