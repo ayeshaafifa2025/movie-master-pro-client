@@ -61,8 +61,8 @@ const router = createBrowserRouter(
 
     },
      {
-                
-                path:"/movies/my-collection",
+        loader:()=>fetch("http://localhost:3000/popular"),
+                path:"/my-collection",
                 element:<MyCollection></MyCollection>
             },
             {
@@ -76,7 +76,7 @@ const router = createBrowserRouter(
             {
                 loader:({params})=>fetch(`http://localhost:3000/movies/${params.id}`),
                 path:"/movies/:id",
-                // path:"/movies/movie_details",
+                
                 element:<MovieDetails></MovieDetails>
             },
     {

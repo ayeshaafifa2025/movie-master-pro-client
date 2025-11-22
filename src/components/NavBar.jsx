@@ -46,7 +46,7 @@ const NavBar = () => {
           <div className="hidden md:flex gap-5 mx-auto">
             <NavLink className="nav-link link link-hover font-extrabold text-blue-600" to="/">Home</NavLink>
             <NavLink className="nav-link link link-hover font-extrabold text-blue-600" to="/movies">All Movies</NavLink>
-            <NavLink className="nav-link link link-hover font-extrabold text-blue-600" to="/movies/my-collection">My Collection</NavLink>
+            <NavLink className="nav-link link link-hover font-extrabold text-blue-600" to="/my-collection">My Collection</NavLink>
           </div>
         )}
 
@@ -118,7 +118,7 @@ const NavBar = () => {
         <nav className="flex flex-col gap-3 text-lg">
           <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/">Home</NavLink>
           <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/movies">All Movies</NavLink>
-          <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/movies/my-collection">My Collection</NavLink>
+          <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/my-collection">My Collection</NavLink>
         </nav>
       </div>
 
