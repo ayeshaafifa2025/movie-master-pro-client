@@ -5,6 +5,7 @@ import { useLoaderData } from 'react-router';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import { AuthContext } from '../provider/AuthContext';
+import Swal from 'sweetalert2';
 
 
 
@@ -52,6 +53,17 @@ const MovieDetails = () => {
         .then(
             data=>{
                 console.log('after choosing',data)
+                if(data.insertedId
+){
+    collectionModalRef.current.close();
+    Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "movie successfully added to your collection",
+  showConfirmButton: false,
+  timer: 1500
+});
+}
             }
         )
 
@@ -95,13 +107,13 @@ const MovieDetails = () => {
             <fieldset className="fieldset">
               {/* name */}
               <label className="label">name</label>
-          <input type="text"  name="name" className="input" readOnly defaultValue={user.displayName}/>
+          <input type="text"  name="name" className="input" readOnly defaultValue={user?.displayName}/>
           {/* photo url */}
           <label className="label">photoUrl</label>
-          <input type="text"  name="photoUrl" className="input" readOnly defaultValue={user.photoURL} />
+          <input type="text"  name="photoUrl" className="input" readOnly defaultValue={user?.photoURL} />
           {/* email */}
           <label className="label">Email</label>
-          <input type="email"  name="email" className="input" readOnly defaultValue={user.email} />
+          <input type="email"  name="email" className="input" readOnly defaultValue={user?.email} />
           {/* REVIEW */}
           <label className="label">Give Your review</label>
           <input type="text"  name="review" className="input" placeholder='right your openion' />
