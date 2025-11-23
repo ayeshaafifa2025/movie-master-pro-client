@@ -5,7 +5,6 @@ import { auth } from '../firebase/firebase.init';
 
 const AuthProvider = ({children}) => {
      const [user, setUser] = useState(null);
-    
     const [loading , setLoading] = useState(true);
     console.log(user,loading);
 
@@ -18,6 +17,12 @@ const AuthProvider = ({children}) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth,email,password);
     }
+
+     const updateUser =(updatedData)=>{
+        return updateProfile(auth.currentUser,updatedData);
+
+    };
+
 
    
     const logOut=()=>{
@@ -43,6 +48,7 @@ const AuthProvider = ({children}) => {
         signIn,
         loading,
         setLoading,
+        updateUser,
         
 
     }

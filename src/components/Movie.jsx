@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import Container from './Container';
 
 const Movie = ({movie}) => {
     // console.log(movie);
@@ -7,32 +8,36 @@ const Movie = ({movie}) => {
 language
 }=movie;
     return (
-       <div className="max-w-sm rounded overflow-hidden shadow-lg m-4 bg-white">
+        <Container>
+                 <div className="max-w-sm rounded-4xl overflow-hidden shadow-lg m-4 bg-pink-200 px-10 py-10">
       <img
-        className="w-full h-70 "
+        className="w-full h-70 rounded-4xl "
         src={movie.posterUrl
 }
         alt={movie.title
 }
       />
       <div className="px-6 py-4">
-        <div className="font-bold text-xl text-red-500 mb-2">Movie Name:{movie.title
+        <div className="font-bold text-xl mb-2">Movie Name:  {movie.title
 }</div>
-        <p className="text-gray-900 font-semibold mb-1">Category:{movie.genre
+        <p className=" font-bold text-xl mb-2">Category:{movie.genre
 }</p>
-        <p className="text-yellow-500 mb-2">Rating: {movie.rating} ⭐</p>
-        <p className="text-pink-600 mb-2">Language:{movie.
+        <p className="font-bold text-xl mb-2">Rating:   {movie.rating}</p>
+        <p className="font-bold text-xl mb-2">Language:   {movie.
 language}</p>
         <button
         
           
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="btn btn-primary text-white"
         >
-            <Link to={`/movies/${_id}`}>View Details</Link> 
+            <Link to={`/movies/${movie._id}`}>View Details</Link> 
           
         </button>
       </div>
     </div>
+
+        </Container>
+      
     );
 };
 

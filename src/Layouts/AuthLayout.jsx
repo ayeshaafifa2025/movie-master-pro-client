@@ -2,12 +2,16 @@ import React from 'react';
 import NavBar from '../components/NavBar';
 import { Outlet } from 'react-router';
 import Footer from '../components/Footer';
+import Container from '../components/Container';
 
 const AuthLayout = () => {
     return (
-        <div>
+
+        <Container>
+  <div className='bg-amber-50'>
              <div>
             <header>
+                
                 <NavBar></NavBar>
             </header>
             <main>
@@ -20,7 +24,10 @@ const AuthLayout = () => {
         </div>
             
         </div>
+        </Container>
+       
     );
+       
 };
 
 export default AuthLayout;

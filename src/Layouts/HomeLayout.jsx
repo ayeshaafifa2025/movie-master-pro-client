@@ -6,14 +6,21 @@ import AboutPlatform from '../components/AboutPlatform';
 import Hero from '../components/Hero';
 import AnimationSection from '../components/AnimationSection';
 
+import Genre from '../components/Genre';
+import Container from '../components/Container';
+
+
 
 const heroPromise = fetch("http://localhost:3000/hero")
 .then(data=>data.json());
 
+
+
 const HomeLayout = () => {
     return (
-        <div>
-            <header>
+        <Container>
+            <div className='bg-amber-50'>
+    <header>
                 <nav>
                     <NavBar></NavBar>
                 </nav>
@@ -21,7 +28,22 @@ const HomeLayout = () => {
 
             </header>
             <main>
-                <AnimationSection></AnimationSection>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+                    <div className="md:col-span-1">
+<aside>
+                    
+                    <Genre></Genre>
+                    
+                    
+                </aside>
+                    </div>
+                    <div className="md:col-span-2">
+ <AnimationSection></AnimationSection>
+                    </div>
+ 
+               
+                </div>
+               
                 
                
             
@@ -34,7 +56,12 @@ const HomeLayout = () => {
             <footer>
                 <Footer></Footer>
             </footer>
-        </div>
+</div>
+
+            
+        
+        </Container>
+        
     );
 };
 

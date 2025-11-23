@@ -6,12 +6,12 @@ const MovieDetailsCard = ({findMovie}) => {
 
     return (
         <div>
-             <div className="flex justify-center items-center min-h-screen bg-gray-50 py-10 px-4">
-      <div className="max-w-3xl bg-white rounded-2xl shadow-lg overflow-hidden">
+             <div className="flex justify-center items-center min-h-screen  ">
+      <div className="max-w-3xl bg-white rounded-2xl py-10 px-10 shadow-lg overflow-hidden">
         <img
           src={findMovie.posterUrl}
           alt={findMovie.title}
-          className="w-full h-100  "
+          className="w-full h-150 rounded-4xl "
         />
         <div className="p-6">
           <h2 className="text-3xl font-bold text-gray-800 mb-3">
@@ -24,7 +24,7 @@ const MovieDetailsCard = ({findMovie}) => {
               <span className="font-semibold">Genre:</span> {findMovie.genre}
             </p>
             <p>
-              <span className="font-semibold">⭐ Rating:</span> {findMovie.rating}
+              <span className="font-semibold">Rating:</span> {findMovie.rating}
             </p>
             <p>
               <span className="font-semibold">Language :</span>{" "}
@@ -35,11 +35,11 @@ const MovieDetailsCard = ({findMovie}) => {
               {findMovie.country}
             </p>
             <p>
-              <span className="font-semibold">👤 Casts:</span>{" "}
+              <span className="font-semibold">Casts:</span>{" "}
               {findMovie.cast}
             </p>
             <p>
-              <span className="font-semibold">✉️ Added By:</span>{" "}
+              <span className="font-semibold">Added By:</span>{" "}
               {findMovie.email}
             </p>
             <p>
@@ -53,16 +53,9 @@ const MovieDetailsCard = ({findMovie}) => {
           </div>
 
           <div className="flex justify-between items-center">
-            <button
-              onClick={() => window.history.back()}
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-5 rounded-lg"
-            >
-              ← Back
-            </button>
+           
 
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg">
-              ADD TO WATCH LIST
-            </button>
+            
           </div>
         </div>
       </div>

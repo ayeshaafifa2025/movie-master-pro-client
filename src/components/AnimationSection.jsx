@@ -3,13 +3,12 @@ import React from 'react';
 const AnimationSection = () => {
   const features = [
     "40+ enjoyable movies",
-    "Dynamic Search",
+    "Filter by genre",
     "User-Friendly Interface",
-    "Smooth Scrolling Animation",
+    "Filter by rating range",
     "Responsive Layout",
     "Interactive Features"
   ];
-
   const colors = [
     "from-pink-400 via-red-500 to-yellow-500",
     "from-green-400 via-teal-500 to-blue-500",
@@ -20,12 +19,12 @@ const AnimationSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-100">
+    <section className="py-8 rounded-xl bg-gray-200">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-4xl sm:text-5xl font-extrabold mb-16 text-gray-800">
+        <h2 className="text-3xl sm:text-3xl font-bold mb-22  text-gray-800">
           Platform Features
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-10">
           {features.map((feature, index) => (
             <div
               key={index}

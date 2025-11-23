@@ -7,16 +7,38 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { auth } from '../firebase/firebase.init';
 import { AuthContext } from '../provider/AuthContext';
+import Loading from './Loading';
 
 
 const Provider = new GoogleAuthProvider();
+
 const Login = () => {
+   const [loading, setLoading] = useState(false);
   const handleGoggleSignIn=()=>{
     // console.log(' Trying to sign in with Google')
     signInWithPopup(auth, Provider)
     .then(result =>{
       console.log(result.user);
       toast(" You have successfully signed in with Google account");
+      
+      const newUser={
+        name: result.user.displayName,
+        email : result.user.email,
+        image: result.user.photoURL
+      }
+    //   create user in the database
+    fetch('http://localhost:3000/users',{
+        method: 'POST',
+        headers:{
+            'content-type':'application/json'
+        },
+        body: JSON.stringify(newUser)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      navigate(`${location.state?location.state:"/"}`)
+        console.log("Data after user",data)
+    })
       
 
     })
@@ -36,6 +58,7 @@ const Login = () => {
   const handleLogin = (e) =>{
   
     e.preventDefault();
+    setLoading(true);
     const form = e.target;
     const email = form.email.value;
         const password = form.password.value;
@@ -46,6 +69,26 @@ const Login = () => {
           console.log(user);
           form.reset();
           toast("Login successful! Welcome back.");
+
+          const newUser={
+        name: result.user.displayName,
+        email : result.user.email,
+        image: result.user.photoURL
+      }
+    //   create user in the database
+    fetch('http://localhost:3000/users',{
+        method: 'POST',
+        headers:{
+            'content-type':'application/json'
+        },
+        body: JSON.stringify(newUser)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      navigate(`${location.state?location.state:"/"}`)
+        console.log("Data after user",data)
+    })
+    setLoading(false);
           
           navigate(`${location.state?location.state:"/"}`)
           
@@ -63,9 +106,8 @@ const handleTogglePasswordShow = (event) => {
    
     return (
 <div>
- 
-
-      <div className="hero bg-base-200 min-h-screen">
+  {
+    loading? <Loading></Loading>:      <div className="hero bg-base-200 min-h-screen">
   <div className="hero-content flex-col">
     <div className="text-center lg:text-left">
       <h1 className="text-5xl font-bold">Login</h1>
@@ -116,6 +158,10 @@ const handleTogglePasswordShow = (event) => {
   </div>
   
 </div>
+  }
+ 
+
+
 
 </div>
       

@@ -5,15 +5,21 @@ import { GoogleAuthProvider,  signInWithPopup } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { auth } from '../firebase/firebase.init';
 import { AuthContext } from '../provider/AuthContext';
+import Loading from './Loading';
+
+
 
 const Provider = new GoogleAuthProvider();
 const Register = () => {
+
+  const [loading, setLoading] = useState(false);
   const handleGoggleSignIn=()=>{
       // console.log(' Trying to sign in with Google')
       signInWithPopup(auth, Provider)
       .then(result =>{
         // console.log(result);
         toast(" You have successfully signed in with Google account");
+        
 
         const newUser={
         name: result.user.displayName,
@@ -30,6 +36,7 @@ const Register = () => {
     })
     .then(res=>res.json())
     .then(data=>{
+      navigate(`${location.state?location.state:"/"}`)
         console.log("Data after user",data)
     })
 
@@ -47,6 +54,7 @@ const Register = () => {
     const navigate = useNavigate();
     const handleRegister=(e)=>{
         e.preventDefault();
+        setLoading(true);
         // console.log(e.target);
         const form= e.target;
         const email = form.email.value;
@@ -81,24 +89,42 @@ return;
         // console.log({name, photoUrl,email,password});
         createUser(email,password)
         .then((result) => {
-          navigate("/");
+          navigate(`${location.state?location.state:"/"}`)
+
     
     const user = result.user;
     console.log(user);
-    form.reset();
-    toast(" Registration successful");
+    
     updateUser({displayName: name , photoURL:photoUrl }).then(()=>{
 setUser({...user,displayName: name , photoURL:photoUrl});
     })
     .catch((error)=>{
 // console.log(error);
 setUser(user)
-    });
+});
 
-    
-    
-    
-    
+  
+    form.reset();
+    toast(" Registration successful");
+    const newUser={
+        name: result.user.displayName,
+        email : result.user.email,
+        image: result.user.photoURL
+      }
+    //   create user in the database
+    fetch('http://localhost:3000/users',{
+        method: 'POST',
+        headers:{
+            'content-type':'application/json'
+        },
+        body: JSON.stringify(newUser)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      navigate(`${location.state?location.state:"/"}`)
+        console.log("Data after user",data)
+        setLoading(false);
+    })
   })
   .catch((error) => {
     // const errorCode = error.code;
@@ -119,12 +145,8 @@ setUser(user)
 
 
       <div>
-
-       
-
-
-
-        <div>
+        {
+  loading ? <Loading></Loading>:( <div>
 <div>
             <div className="hero bg-base-200 min-h-screen">
   <div className="hero-content flex-col ">
@@ -181,7 +203,14 @@ setUser(user)
 </div>
 
         </div>
-      </div>
+      </div>)
+}
+
+       
+
+
+
+       
 
       </div>
       

@@ -1,7 +1,7 @@
 
 
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../provider/AuthContext';
 import { toast } from 'react-toastify';
@@ -12,11 +12,24 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { BsThreeDotsVertical } from 'react-icons/bs';
 
 
+
 const NavBar = () => {
   const { user, loading, logOut } = useContext(AuthContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);  
   const [sidebarOpen, setSidebarOpen] = useState(false);    
-  const [threeDotOpen, setThreeDotOpen] = useState(false); 
+  const [threeDotOpen, setThreeDotOpen] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
+ 
+  useEffect(() => {
+    const html = document.querySelector('html')
+     html.setAttribute("data-theme", theme)
+     localStorage.setItem("theme", theme)
+  }, [theme])
+
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark": "light")
+  }
+
 
   const handleLogOut = () => {
     logOut()
@@ -30,13 +43,24 @@ const NavBar = () => {
   };
 
   return (
-    <div>
-      <nav className="relative flex items-center justify-between px-4 py-4 bg-pink-200 shadow-md">
+
+  
+ <div>
+      <nav className="relative flex mb-10 items-center rounded-2xl justify-between px-4 py-4 bg-pink-500 shadow-md">
+
+        <input
+           onChange={(e)=> handleTheme(e.target.checked)}
+           type="checkbox"
+           defaultChecked={localStorage.getItem('theme') === "dark"}
+           className="toggle"/>
+
+
+
         <button className="md:hidden text-white text-2xl" onClick={() => setSidebarOpen(true)}>
           <GiHamburgerMenu />
         </button>
 
-        <h2 className="text-2xl font-extrabold text-white tracking-wide mx-auto md:mx-0">
+        <h2 className="text-3xl font-extrabold text-white tracking-wide mx-auto md:mx-0">
             <span className='text-purple-700'>FilmFusion</span> <span className='text-pink-700'>Pro</span>
           
         </h2>
@@ -47,6 +71,8 @@ const NavBar = () => {
             <NavLink className="nav-link link link-hover font-extrabold text-blue-600" to="/">Home</NavLink>
             <NavLink className="nav-link link link-hover font-extrabold text-blue-600" to="/movies">All Movies</NavLink>
             <NavLink className="nav-link link link-hover font-extrabold text-blue-600" to="/my-collection">My Collection</NavLink>
+            <NavLink className='nav-link link link-hover font-extrabold text-blue-600' to="/movies/add">Create a movie</NavLink>
+            
           </div>
         )}
 
@@ -63,11 +89,9 @@ const NavBar = () => {
                 />
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-16 w-56 bg-white rounded-lg shadow-lg p-3 z-50">
-                    <p className="font-semibold">{user.displayName || 'User'}</p>
+                    <p className="font-semibold text-gray-500">{user.displayName || 'User'}</p>
                     <p className="text-sm text-gray-500">{user.email}</p>
-                    {/* <Link to="/person/profile">
-                      <button className="w-full py-1 bg-purple-500 text-white rounded-md mt-2">My Profile</button>
-                    </Link> */}
+                    
                     <button onClick={handleLogOut} className="w-full py-1 bg-red-500 text-white rounded-md mt-2">Logout</button>
                   </div>
                 )}
@@ -90,11 +114,8 @@ const NavBar = () => {
               {user ? (
                 <>
                   <img className="w-12 h-12 rounded-full mb-2" src={user.photoURL || userImg} alt="User" />
-                  <p className="font-semibold">{user.displayName || 'User'}</p>
+                  <p className="font-semibold text-gray-500">{user.displayName || 'User'}</p>
                   <p className="text-sm text-gray-500">{user.email}</p>
-                  {/* <Link to="/person/profile">
-                    <button onClick={() => setThreeDotOpen(false)} className="w-full py-1 bg-purple-500 text-white rounded-md mt-2">My Profile</button>
-                  </Link> */}
                   <button onClick={handleLogOut} className="w-full py-1 bg-red-500 text-white rounded-md mt-2">Logout</button>
                 </>
               ) : (
@@ -119,12 +140,16 @@ const NavBar = () => {
           <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/">Home</NavLink>
           <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/movies">All Movies</NavLink>
           <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/my-collection">My Collection</NavLink>
+          <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/movies/add">Create a movie</NavLink>
+          
         </nav>
       </div>
 
      
       {sidebarOpen && <div className="fixed inset-0 bg-black/40 z-40" onClick={() => setSidebarOpen(false)}></div>}
     </div>
+   
+   
   );
 };
 

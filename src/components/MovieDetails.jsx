@@ -1,53 +1,57 @@
-import React, { use, useRef } from 'react';
+
+import React, { use,useEffect, useState } from 'react';
 
 import MovieDetailsCard from './MovieDetailsCard';
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import { AuthContext } from '../provider/AuthContext';
 import Swal from 'sweetalert2';
+import Container from './Container';
 
 
 
 const MovieDetails = () => {
-    
+    const {user}=use(AuthContext);
+    // const collectionModalRef = useRef(null);
     const findMovie=useLoaderData();
-    const {_id:movieId}=useLoaderData();
+    const {_id:movieId,title}=useLoaderData();
+    console.log(movieId);
     console.log(findMovie);
 
-    const {user}=use(AuthContext);
 
-    const collectionModalRef = useRef(null);
-    const handleCollectionModalOpen =()=>{
-        collectionModalRef.current.showModal();
-    }
+    // watchlist:
+const [isWatched, setIsWatched] = useState(false);
+    useEffect(() => {
+    if (!user?.email) return;
 
-    const handleCollectionSubmit =(e)=>{
-        e.preventDefault();
-        const name =e.target.name.value;
-        const email =e.target.email.value;
-        const rating =e.target.rating.value;
-        const review =e.target.review.value;
-        const photoUrl =e.target.photoUrl.value;
-        // console.log(_id,name, email,rating,review,photoUrl)
-        const newPopular={
+    fetch(`http://localhost:3000/watched?email=${user.email}`)
+        .then(res => res.json())
+        .then(data => {
+            const already = data.find(item => item.movieId === movieId);
+            if (already) {
+                setIsWatched(true);
+            }
+        });
+}, [user, movieId]);
+ const handleWatchlist =()=>{
+        if (isWatched) return;
 
-            movie : movieId,
-            user_name:name,
-            user_email:email,
-            user_photo:photoUrl,
-            user_review:review,
-            user_rating:rating
+        const newWatched={
 
-
-
+            movieId : movieId,
+            movie:title,
+            
+            user:user.displayName,
+            email:user.email,
+            photo:user.photoURL
         }
-        fetch('http://localhost:3000/popular',{
+        fetch('http://localhost:3000/watched',{
             method:'POST',
             headers:{
                 'content-type':'application/json'
             },
-            body:JSON.stringify({newPopular})
+            body:JSON.stringify(newWatched)
         })
         .then(res=>res.json())
         .then(
@@ -55,108 +59,57 @@ const MovieDetails = () => {
                 console.log('after choosing',data)
                 if(data.insertedId
 ){
-    collectionModalRef.current.close();
+    
     Swal.fire({
   position: "top-end",
   icon: "success",
-  title: "movie successfully added to your collection",
+  title: "movie successfully added to watchlist",
   showConfirmButton: false,
   timer: 1500
 });
+setIsWatched(true);
+
 }
             }
         )
 
     }
-    
-    
-   
+
+
+
     return (
-        <div>
+        <Container>
+            <div className='bg-amber-50'>
             <NavBar></NavBar>
+
             <main>
 
-                
-                     
                      <MovieDetailsCard findMovie={findMovie}></MovieDetailsCard>
-
-
-                     {/* my collection */}
-                     <div>
-                        <button onClick={handleCollectionModalOpen} className='btn btn-primary'>
-                           collect movie
-                        </button>
-                        {/* modal */}
-                        {/* Open the modal using document.getElementById('ID').showModal() method */}
-
-<dialog ref={collectionModalRef} className="modal modal-bottom sm:modal-middle">
-  <div className="modal-box">
-     <div>
-        <div>
-<div>
-            <div className="hero bg-base-200 min-h-screen">
-  <div className="hero-content flex-col ">
-    <div className="text-center lg:text-left">
-      <h1 className="text-5xl font-bold">Collect This Movie</h1>
-      
-    </div>
-    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-      <div className="card-body bg-amber-200">
-    
-        <form onSubmit={handleCollectionSubmit}>
-            <fieldset className="fieldset">
-              {/* name */}
-              <label className="label">name</label>
-          <input type="text"  name="name" className="input" readOnly defaultValue={user?.displayName}/>
-          {/* photo url */}
-          <label className="label">photoUrl</label>
-          <input type="text"  name="photoUrl" className="input" readOnly defaultValue={user?.photoURL} />
-          {/* email */}
-          <label className="label">Email</label>
-          <input type="email"  name="email" className="input" readOnly defaultValue={user?.email} />
-          {/* REVIEW */}
-          <label className="label">Give Your review</label>
-          <input type="text"  name="review" className="input" placeholder='right your openion' />
-          {/* Rating */}
-          <label className="label">Give Your rating</label>
-          <input type="text"  name="rating" className="input" placeholder='give rating' />
-          
-   
-          <button type='submit' className="btn btn-neutral mt-4">Add to your Collection</button>
-        </fieldset>
-        </form>
-      </div>
-    </div>
-      
-  </div>
-
-</div>
-
-        </div>
-      </div>
-
-      </div>
-      
-    
-    
-    <div className="modal-action">
-      <form method="dialog">
-        {/* if there is a button in form, it will close the modal */}
-        <button className="btn">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>
-                     </div>
                     
-                     
-
                 
             </main>
+             <div className=' flex justify-between items-center px-20 '>
+                        <button disabled={isWatched} onClick={handleWatchlist}  className="btn btn-primary text-white">
+             {isWatched ? "Already in Watchlist" : "Add to Watchlist"}
+            </button>
+
+            <button  className='btn btn-primary text-white'>
+    <Link to={"/watched"}>
+    Go To Your watchlist
+
+    </Link>
+                           
+                        </button>
+                     </div>
             <Footer></Footer>
             
         </div>
+
+        </Container>
+        
     );
 };
 
 export default MovieDetails;
+
+

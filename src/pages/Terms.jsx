@@ -2,7 +2,7 @@ import React from 'react';
 
 const Terms = () => {
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-6 font-sans text-gray-800">
+    <div className="max-w-3xl bg-amber-100 mx-auto p-6 space-y-6 font-sans text-gray-800">
       <h1 className="text-3xl font-bold">Terms and Conditions</h1>
       
       <p>Welcome to <strong>FilmFusion Pro</strong>! By accessing or using our website, you agree to comply with and be bound by the following terms and conditions. Please read them carefully before using our services.</p>

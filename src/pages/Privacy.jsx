@@ -2,7 +2,7 @@ import React from 'react';
 
 const Privacy = () => {
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-6 font-sans text-gray-800">
+    <div className="max-w-3xl mx-auto bg-amber-100 p-6 space-y-6 font-sans text-gray-800">
       <h1 className="text-3xl font-bold">Privacy Policy</h1>
       
       <p>
@@ -66,7 +66,7 @@ const Privacy = () => {
       </section>
 
       <p className="font-semibold">
-        If you have any questions about this Privacy Policy, please contact us at <strong>support@moviemasterpro.com</strong>.
+        If you have any questions about this Privacy Policy, please contact us at <strong>support@filmfusionpro.com</strong>.
       </p>
     </div>
   );

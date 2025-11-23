@@ -14,14 +14,17 @@ import MyCollection from "../components/MyCollection";
 import AddMovie from "../components/AddMovie";
 import UpdateMovie from "../components/UpdateMovie";
 import MovieDetails from "../components/MovieDetails";
+import Watchlist from "../components/Watchlist";
 
-// import PrivateRoute from "../provider/PrivateRoute";
+import PrivateRoute from "../provider/PrivateRoute";
+import MyCollectionDetails from "../components/MyCollectionDetails";
 
 
 
 const router = createBrowserRouter(
     [
         {
+            
             path: "/",
             element: <HomeLayout></HomeLayout>,
             children: [
@@ -61,17 +64,23 @@ const router = createBrowserRouter(
 
     },
      {
-        loader:()=>fetch("http://localhost:3000/popular"),
+        
                 path:"/my-collection",
-                element:<MyCollection></MyCollection>
+                element:<PrivateRoute><MyCollection></MyCollection></PrivateRoute>
+            },
+     {
+        loader:({params})=>fetch(`http://localhost:3000/popular/${params.id}`),
+                path:"/popular/:id",
+                element:<PrivateRoute><MyCollectionDetails></MyCollectionDetails></PrivateRoute>
             },
             {
                 path:"/movies/add",
-                element:<AddMovie></AddMovie>
+                element:<PrivateRoute><AddMovie></AddMovie></PrivateRoute>
             },
             {
-                path:"/movies/update/:id",
-                element:<UpdateMovie></UpdateMovie>
+                loader:({params})=>fetch(`http://localhost:3000/popular/${params.id}`),
+                path:"/update/:id",
+                element:<PrivateRoute><UpdateMovie></UpdateMovie></PrivateRoute>
             },
             {
                 loader:({params})=>fetch(`http://localhost:3000/movies/${params.id}`),
@@ -107,7 +116,13 @@ const router = createBrowserRouter(
     
     
    
-   
+   {
+        // loader:()=>fetch("http://localhost:3000/watched"),
+        
+        
+                path:"/watched",
+                element:<PrivateRoute><Watchlist></Watchlist></PrivateRoute>
+            },
     {
         path: "/*",
         element: <h3>Error404</h3>

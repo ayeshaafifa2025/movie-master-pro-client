@@ -1,51 +1,50 @@
+
+
+
+
 import React from 'react';
+import { Link } from 'react-router';
 
-const MySingle = ({single}) => {
-    console.log(single);
-    const{newPopular}=single|| {};
-    const{_id,movie,user_name,user_email,user_photo,user_review,user_rating}= newPopular || {};
-    return (
-        <div className=''>
-           <div className="max-w-md  mx-auto bg-white rounded-2xl shadow-xl p-6 mt-6 border border-gray-200 hover:shadow-2xl transition duration-300">
-      <div className="flex items-center gap-4">
-        <img
-          src={user_photo}
-          alt={user_name}
-          className="w-16 h-16 rounded-full border-2 border-purple-400 shadow"
-        />
+const MySingle = ({ single, handleDelete }) => {
+  return (
+    <div className="max-w-sm rounded overflow-hidden shadow-lg m-4 bg-pink-200 px-10 py-10">
+      <img
+        className="w-full h-70 rounded-4xl"
+        src={single.posterUrl}
+        alt={single.title}
+       
+      />
 
-        <div>
-          <h2 className="text-xl font-semibold text-gray-800 capitalize">{user_name}</h2>
-          <p className="text-sm text-gray-500">{user_email}</p>
+      <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2">
+          Movie Name: {single.title}
         </div>
-      </div>
 
-      <div className="mt-4 border-b border-gray-200"></div>
-
-      <div className="mt-4">
-        <p className="text-sm text-gray-500 font-medium">Movie ID:</p>
-        <p className="text-gray-800 font-semibold">{movie}</p>
-      </div>
-
-      <div className="mt-4">
-        <p className="text-sm text-gray-500 font-medium">Review:</p>
-        <p className="text-gray-800 bg-purple-50 p-3 rounded-xl mt-1">
-          {user_review}
+        <p className="font-bold text-xl mb-2">
+          Category: {single.genre}
         </p>
-      </div>
 
-      <div className="mt-4 flex items-center gap-2">
-        <p className="text-sm text-gray-500 font-medium">Rating:</p>
-        <span className="px-4 py-1 bg-yellow-300 text-gray-900 font-semibold rounded-full">
-          ⭐ {user_rating}/10
-        </span>
+        <p className="font-bold text-xl mb-2">
+          Rating: {single.rating} ⭐
+        </p>
+<div className='flex justify-between items-center'>
+ <button className="btn btn-primary text-white">
+          <Link to={`/popular/${single._id}`}>View Details</Link>
+        </button>
+
+        <button
+          onClick={() => handleDelete(single._id)}
+          className="btn btn-primary text-white "
+        >
+          Delete
+        </button>
+</div>
+       
       </div>
     </div>
-             
-            
-            
-        </div>
-    );
+  );
 };
 
 export default MySingle;
+
+

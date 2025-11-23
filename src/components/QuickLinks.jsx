@@ -3,13 +3,14 @@ import React from 'react';
 import { Outlet } from 'react-router';
 import NavBar from './NavBar';
 import Footer from './Footer';
+import Container from './Container';
 
 
 
 const QuickLinks = () => {
     return (
-        
-              <div>
+        <Container>
+<div>
             
             <NavBar></NavBar>
             <main>
@@ -20,6 +21,8 @@ const QuickLinks = () => {
             <Footer></Footer>
         </div>
 
+        </Container>
+              
        
       
     );

@@ -10,7 +10,7 @@ const Contact = () => {
         lineHeight: 1.6,
       }}
     >
-      <h1 style={{ fontSize: "32px", marginBottom: "20px" }}>📩 Contact Us</h1>
+      <h1 style={{ fontSize: "32px", marginBottom: "20px" }}> Contact Us</h1>
 
      
       <div style={{ marginBottom: "30px" }}>
