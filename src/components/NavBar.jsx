@@ -57,7 +57,6 @@ const NavBar = () => {
 
 
         <button className="md:hidden text-white text-2xl" onClick={() => setSidebarOpen(true)}>
-          <GiHamburgerMenu />
         </button>
 
         <h2 className="text-3xl font-extrabold text-white tracking-wide mx-auto md:mx-0">

@@ -21,7 +21,7 @@ const AnimationSection = () => {
   return (
     <section className="py-8 rounded-xl bg-gray-200">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl sm:text-3xl font-bold mb-22  text-gray-800">
+        <h2 className="text-3xl sm:text-3xl font-bold mb-22  text-black">
           Platform Features
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-10">

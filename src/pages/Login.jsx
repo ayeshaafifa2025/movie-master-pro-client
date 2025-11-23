@@ -7,15 +7,15 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { auth } from '../firebase/firebase.init';
 import { AuthContext } from '../provider/AuthContext';
-import Loading from './Loading';
+
 
 
 const Provider = new GoogleAuthProvider();
 
 const Login = () => {
-   const [loading, setLoading] = useState(false);
+   
   const handleGoggleSignIn=()=>{
-    // console.log(' Trying to sign in with Google')
+    // console.log('sign in with Google')
     signInWithPopup(auth, Provider)
     .then(result =>{
       console.log(result.user);
@@ -58,7 +58,7 @@ const Login = () => {
   const handleLogin = (e) =>{
   
     e.preventDefault();
-    setLoading(true);
+    
     const form = e.target;
     const email = form.email.value;
         const password = form.password.value;
@@ -88,7 +88,7 @@ const Login = () => {
       navigate(`${location.state?location.state:"/"}`)
         console.log("Data after user",data)
     })
-    setLoading(false);
+    
           
           navigate(`${location.state?location.state:"/"}`)
           
@@ -106,8 +106,7 @@ const handleTogglePasswordShow = (event) => {
    
     return (
 <div>
-  {
-    loading? <Loading></Loading>:      <div className="hero bg-base-200 min-h-screen">
+  <div className="hero bg-base-200 min-h-screen">
   <div className="hero-content flex-col">
     <div className="text-center lg:text-left">
       <h1 className="text-5xl font-bold">Login</h1>
@@ -158,7 +157,6 @@ const handleTogglePasswordShow = (event) => {
   </div>
   
 </div>
-  }
  
 
 

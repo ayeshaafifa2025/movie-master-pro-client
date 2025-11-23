@@ -90,7 +90,7 @@ const AddMovie = () => {
     loading? <Loading></Loading>: (<main>
             <div className="min-h-screen bg-gradient-to-br from-blue-100 to-blue-300 flex items-center justify-center p-6">
 <div className="w-full max-w-lg bg-white rounded-3xl shadow-2xl p-8 border border-blue-200">
-<h1 className="text-4xl font-bold text-center mb-6 text-blue-700">Create A Movie</h1>
+<h1 className="text-4xl font-bold text-center mb-6 text-black">Create A Movie</h1>
 
 
 <form onSubmit={handleCreateMovie}>

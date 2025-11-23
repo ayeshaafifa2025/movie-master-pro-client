@@ -5,14 +5,14 @@ import { GoogleAuthProvider,  signInWithPopup } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { auth } from '../firebase/firebase.init';
 import { AuthContext } from '../provider/AuthContext';
-import Loading from './Loading';
+
 
 
 
 const Provider = new GoogleAuthProvider();
 const Register = () => {
 
-  const [loading, setLoading] = useState(false);
+
   const handleGoggleSignIn=()=>{
       // console.log(' Trying to sign in with Google')
       signInWithPopup(auth, Provider)
@@ -54,7 +54,7 @@ const Register = () => {
     const navigate = useNavigate();
     const handleRegister=(e)=>{
         e.preventDefault();
-        setLoading(true);
+       
         // console.log(e.target);
         const form= e.target;
         const email = form.email.value;
@@ -65,8 +65,8 @@ const Register = () => {
 
     
 
-        if(password.length<8){
-      setPasswordError(" password should be more than eight characters")
+        if(password.length<6){
+      setPasswordError(" password should be more than 6 characters")
       return;
     }
     else if(!upperCaseRegex.test(password)){
@@ -123,7 +123,7 @@ setUser(user)
     .then(data=>{
       navigate(`${location.state?location.state:"/"}`)
         console.log("Data after user",data)
-        setLoading(false);
+       
     })
   })
   .catch((error) => {
@@ -145,8 +145,7 @@ setUser(user)
 
 
       <div>
-        {
-  loading ? <Loading></Loading>:( <div>
+        <div>
 <div>
             <div className="hero bg-base-200 min-h-screen">
   <div className="hero-content flex-col ">
@@ -203,8 +202,7 @@ setUser(user)
 </div>
 
         </div>
-      </div>)
-}
+      </div>
 
        
 

@@ -84,7 +84,7 @@ const UpdateMovie = () => {
         loading? <Loading></Loading>: ( <main>
             <div className="min-h-screen  flex items-center justify-center p-6">
 <div className="w-full max-w-lg bg-white rounded-3xl shadow-2xl p-8 border border-blue-200">
-<h1 className="text-4xl font-bold text-center mb-6 text-blue-700">Update a movie</h1>
+<h1 className="text-4xl font-bold text-center mb-6 text-black">Update a movie</h1>
 
 
 <form onSubmit={updateMovie}>

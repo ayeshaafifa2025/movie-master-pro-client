@@ -1,5 +1,4 @@
 
-
 import React, { useEffect, useState } from "react";
 
 const Genre = () => {
@@ -24,7 +23,7 @@ const Genre = () => {
     <div className="bg-purple-800 text-white rounded-xl">
         <aside>
 <div style={{ padding: "20px", textAlign: "center" }}>
-      <h1 className="text-3xl font-bold mb-5">Our Movie Categories</h1>
+      <h1 className="text-3xl text-black font-bold mb-5">Our Movie Categories</h1>
 <div  >
 {genres.map((genre, index) => (
         <p key={index} className="mb-1">

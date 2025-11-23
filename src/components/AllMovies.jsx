@@ -36,10 +36,10 @@ const AllMovies = () => {
     return (
 
         <Container>
-<div className='bg-pink-100'>
+<div className='bg-pink-100 '>
             <NavBar />
             <div className='p-4'>
-                <label className="mr-4">
+                <label className="mr-4 text-black">
                     <select value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)} className="border p-2 ml-2">
                         <option value="">ALL</option>
                         <option value="Historical">Historical</option>
@@ -62,7 +62,7 @@ const AllMovies = () => {
                 </label>
                 
                 <label>
-                    <select value={ratingRange} onChange={(e) => setRatingRange(e.target.value)} className="border p-2 ml-2">
+                    <select value={ratingRange} onChange={(e) => setRatingRange(e.target.value)} className="border text-black p-2 ml-2">
                         <option value="">All</option>
                          <option value="4-5">4-5</option>
                         <option value="5-6">5-6</option>

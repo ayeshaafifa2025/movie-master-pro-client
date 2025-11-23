@@ -3,7 +3,7 @@ import React from 'react';
 const AboutPlatform = () => {
     return (
         <div className="p-6  mt-10 mb-10 mx-auto rounded-2xl bg-purple-400">
-            <h1 className="text-3xl font-bold mb-5 text-center">About This Platform</h1>
+            <h1 className="text-3xl font-bold mb-5 text-black text-center">About This Platform</h1>
 
             <div className=' grid grid-cols-1 md:grid-cols-2 gap-20   justify-between items-center'>
             <div className="w-full  mb-6">
@@ -20,7 +20,7 @@ const AboutPlatform = () => {
             </div>
 
             <div>
-                <h2 className="text-2xl font-bold mb-5">Platform Features</h2>
+                <h2 className="text-2xl font-bold text-black mb-5">Platform Features</h2>
 
             <p className="text-lg leading-relaxed font-semibold mb-5">
                 Welcome to our Movie MasterPro platform — a modern and user-friendly movie collection system 

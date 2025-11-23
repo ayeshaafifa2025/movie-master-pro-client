@@ -11,15 +11,15 @@ Dynamic Movie Carousel (Hero Section) – Featured movies dynamically fetched fr
 
 Top Rated Movies Section – Shows the top 5 highest-rated movies with posters, title, genre, and rating.
 
-Recently Added Movies – Displays the 6 latest movies added to the system.
+Latest Movies – Displays the 6 latest movies added to the system.
 
-Static Genre Section – Lists all movie genres for easy navigation.
+Static Genre Section – Lists all movie genre dynamically 
 
-Search Functionality – Global movie search to quickly find movies by title, genre, or year.
+ADDED Genre and rating range based filter  buy MongoDB operation
 
 User Authentication – Email/password login and registration, including Google OAuth integration.
 
-Protected Routes – Pages like /movies/add and /my-collection accessible only to logged-in users.
+Protected Routes – MY COLLECTION , UPDATE MOVIE , CREATE MOVIE ,ADD TO WATCHLIST  accessible only to logged-in users.
 
 CRUD Operations on Movies – Add, update, delete, and view movies with proper UI forms and validation.
 
