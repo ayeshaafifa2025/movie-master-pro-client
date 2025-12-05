@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaFacebookSquare, FaInstagramSquare } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { IoLogoYoutube } from 'react-icons/io';
 import { NavLink } from 'react-router';
+import { ThemeContext } from '../Layouts/ThemeProvider';
 
 const Footer = () => {
+  const { theme } = useContext(ThemeContext);
     return (
         <div>
-            <div className="bg-green-600 rounded-2xl text-gray-100 py-5 mt-10">
+          
+            <div className={`mt-10 py-5 ${theme === 'light' ? 'bg-blue-200  ' : 'bg-purple-400'}`}>
               <h1 className='text-3xl mb-5 font-bold mt-5 text-center text-black '>Our Details</h1>
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -15,7 +18,7 @@ const Footer = () => {
      
       <div>
         <h3 className="text-xl font-bold text-black mb-3">FilmFusion Pro</h3>
-        <p className="text-gray-100 text-sm">
+        <p className="text-black text-sm">
   Discover meaningful, family-friendly, and inspiring films from around the world.
   FilmFusion Pro helps you explore movies with clean details, safe content insights,
   and your own personalized collection — all in one place.
@@ -27,7 +30,7 @@ const Footer = () => {
   <h3 className="text-xl font-bold mb-3 text-black">Quick Links</h3>
   
 
-<ul className="space-y-2 text-gray-100">
+<ul className="space-y-2 text-black">
   <li>
     <NavLink to="/quick/about" className="nav-link">
       About Us
@@ -60,19 +63,19 @@ const Footer = () => {
         <div className="flex flex-col space-y-2 text-gray-400">
           <div className='flex '>
             <button className='mr-3'><FaFacebookSquare /></button>
-            <a href="https://facebook.com" className="text-white ">Facebook</a>
+            <a href="https://facebook.com" className="text-black ">Facebook</a>
           </div>
           <div className='flex'>
             <button className='mr-3'><FaInstagramSquare /></button>
-            <a href="https://instagram.com" className="text-white ">Instagram</a>
+            <a href="https://instagram.com" className="text-black ">Instagram</a>
           </div>
           <div className='flex'>
             <button className='mr-3'><FaXTwitter /></button>
-            <a href="https://twitter.com" className="text-white ">X</a>
+            <a href="https://twitter.com" className="text-black ">X</a>
           </div>
           <div className='flex'>
             <button className='mr-3'><IoLogoYoutube /></button>
-            <a href="https://youtube.com" className="text-white ">YouTube</a>
+            <a href="https://youtube.com" className="text-black ">YouTube</a>
           </div>
    
   

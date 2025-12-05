@@ -1,16 +1,18 @@
-import React, { use, useState } from 'react';
+import React, { use, useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { GoogleAuthProvider,  signInWithPopup } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { auth } from '../firebase/firebase.init';
 import { AuthContext } from '../provider/AuthContext';
+import { ThemeContext } from '../Layouts/ThemeProvider';
 
 
 
 
 const Provider = new GoogleAuthProvider();
 const Register = () => {
+    const {theme} = useContext(ThemeContext)
 
 
   const handleGoggleSignIn=()=>{
@@ -27,7 +29,7 @@ const Register = () => {
         image: result.user.photoURL
       }
     //   create user in the database
-    fetch('http://localhost:3000/users',{
+    fetch('https://movie-master-pro-server-six.vercel.app/users',{
         method: 'POST',
         headers:{
             'content-type':'application/json'
@@ -112,7 +114,7 @@ setUser(user)
         image: result.user.photoURL
       }
     //   create user in the database
-    fetch('http://localhost:3000/users',{
+    fetch('https://movie-master-pro-server-six.vercel.app/users',{
         method: 'POST',
         headers:{
             'content-type':'application/json'
@@ -147,27 +149,28 @@ setUser(user)
       <div>
         <div>
 <div>
-            <div className="hero bg-base-200 min-h-screen">
+            {/* <div className="hero bg-base-200 min-h-screen"> */}
+             <div className={` hero min-h-screen ${theme === 'light' ? 'bg-blue-400  ' : 'bg-purple-200'}`}>
   <div className="hero-content flex-col ">
     <div className="text-center lg:text-left">
       <h1 className="text-5xl font-bold">Register</h1>
       
     </div>
     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-      <div className="card-body bg-blue-200">
+      <div className="card-body bg-white">
         <form onSubmit={handleRegister}>
             <fieldset className="fieldset">
               {/* name */}
-              <label className="label">name</label>
+              <label className="label text-black">name</label>
           <input type="text"  name="name" className="input" placeholder="name" required />
           {/* photo url */}
-          <label className="label">photoUrl</label>
+          <label className="label text-black">photoUrl</label>
           <input type="text"  name="photoUrl" className="input" placeholder="photoUrl" required />
           {/* email */}
-          <label className="label">Email</label>
+          <label className="label text-black">Email</label>
           <input type="email"  name="email" className="input" placeholder="Email" required />
           {/* password */}
-          <label className="label">Password</label>
+          <label className="label text-black">Password</label>
           {/* <input type="password"  name="password" className="input" placeholder="Password" required /> */}
           <div className='relative'>
          <input
@@ -186,7 +189,7 @@ setUser(user)
    
           <button type='submit' className="btn btn-neutral mt-4">Register</button>
           
-          <p className="font-semibold text-center pt-5">
+          <p className="font-semibold text-center text-black pt-5">
               Already Have An Account ?{" "}
               <Link className="font-bold text-red-600 link link-hover" to="/auth/login">
                 Login

@@ -5,13 +5,12 @@ import { Outlet } from 'react-router';
 import AboutPlatform from '../components/AboutPlatform';
 import Hero from '../components/Hero';
 import AnimationSection from '../components/AnimationSection';
-
 import Genre from '../components/Genre';
 import Container from '../components/Container';
 
 
 
-const heroPromise = fetch("http://localhost:3000/hero")
+const heroPromise = fetch("https://movie-master-pro-server-six.vercel.app/hero")
 .then(data=>data.json());
 
 
@@ -19,7 +18,7 @@ const heroPromise = fetch("http://localhost:3000/hero")
 const HomeLayout = () => {
     return (
         <Container>
-            <div className='bg-amber-50'>
+            <div className=''>
     <header>
                 <nav>
                     <NavBar></NavBar>

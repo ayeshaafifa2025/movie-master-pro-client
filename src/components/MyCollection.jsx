@@ -7,8 +7,10 @@ import Footer from "./Footer";
 import MySingle from "./MySingle";
 import Swal from "sweetalert2";
 import Container from "./Container";
+import { ThemeContext } from "../Layouts/ThemeProvider";
 
 const MyCollection = () => {
+  const { theme } = useContext(ThemeContext);
   const { user } = useContext(AuthContext);
   const [collection, setCollection] = useState([]);
 
@@ -26,7 +28,7 @@ const MyCollection = () => {
           if (result.isConfirmed) {
             console.log(' Delete button pressed');
         
-            fetch(`http://localhost:3000/popular/${_id}`,{
+            fetch(`https://movie-master-pro-server-six.vercel.app/popular/${_id}`,{
               method: 'DELETE'
             })
             .then(res =>res.json())
@@ -48,22 +50,25 @@ const MyCollection = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:3000/popular?email=${user.email}`)
+    fetch(`https://movie-master-pro-server-six.vercel.app/popular?email=${user.email}`)
       .then(res => res.json())
       .then(single => {console.log(single);
         const already = single.find(item=> item.email == user.email);
         if(already)
         setCollection(single)});
   }, [user]);
-//  if (loading) return <p>Loading...</p>;
+
 
   return (
     <Container>
-      <div className="bg-amber-50">
+    
+       <div className={` ${theme === 'light' ? 'bg-blue-400  ' : 'bg-purple-200'}`}>
       <NavBar />
       <menu>
         <h1 className="text-3xl font-bold text-center text-black">My Collection: {collection.length}</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
+             gap-8 px-10 py-10 rounded-xl mx-auto 
+             justify-items-center">
           {collection.map(single => (
             <MySingle key={single._id} single={single} handleDelete={handleDelete} />
           ))}

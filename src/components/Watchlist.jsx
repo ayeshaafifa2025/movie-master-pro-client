@@ -5,8 +5,10 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Watched from "./Watched";
 import Container from "./Container";
+import { ThemeContext } from "../Layouts/ThemeProvider";
 
 const Watchlist = () => {
+  const { theme } = useContext(ThemeContext);
   const { user } = useContext(AuthContext);
   const [watchlist, setWatchlist] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,7 +16,7 @@ const Watchlist = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:3000/watched?email=${user.email}`)
+    fetch(`https://movie-master-pro-server-six.vercel.app/watched?email=${user.email}`)
       .then(res => res.json())
       .then(data => {
         console.log(data);
@@ -28,7 +30,8 @@ const Watchlist = () => {
   return (
 
     <Container>
-<div className="bg-amber-50">
+{/* <div className=""> */}
+ <div className={` ${theme === 'light' ? 'bg-blue-400  ' : 'bg-purple-200'}`}>
       <NavBar />
       <menu className="px-10 py-10 ">
         <h1 className="text-3xl text-black text-center font-bold">My Watchlist: {watchlist.length}</h1>

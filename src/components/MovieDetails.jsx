@@ -1,115 +1,132 @@
 
-import React, { use,useEffect, useState } from 'react';
-
+import React, { useContext, useEffect, useState } from 'react';
 import MovieDetailsCard from './MovieDetailsCard';
-import { Link, useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate, useLocation, Link } from 'react-router';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import { AuthContext } from '../provider/AuthContext';
 import Swal from 'sweetalert2';
 import Container from './Container';
-
-
+import { ThemeContext } from '../Layouts/ThemeProvider';
 
 const MovieDetails = () => {
-    const {user}=use(AuthContext);
-    // const collectionModalRef = useRef(null);
-    const findMovie=useLoaderData();
-    const {_id:movieId,title}=useLoaderData();
-    console.log(movieId);
-    console.log(findMovie);
+    const { theme } = useContext(ThemeContext);
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const findMovie = useLoaderData();
+    const { _id: movieId, title } = useLoaderData();
 
+    const [isWatched, setIsWatched] = useState(false);
 
-    // watchlist:
-const [isWatched, setIsWatched] = useState(false);
+   
     useEffect(() => {
-    if (!user?.email) return;
+        if (!user?.email) return;
+        fetch(`https://movie-master-pro-server-six.vercel.app/watched?email=${user.email}`)
+            .then(res => res.json())
+            .then(data => {
+                const already = data.find(item => item.movieId === movieId);
+                if (already) setIsWatched(true);
+            });
+    }, [user, movieId]);
 
-    fetch(`http://localhost:3000/watched?email=${user.email}`)
-        .then(res => res.json())
-        .then(data => {
-            const already = data.find(item => item.movieId === movieId);
-            if (already) {
-                setIsWatched(true);
-            }
-        });
-}, [user, movieId]);
- const handleWatchlist =()=>{
+    
+    useEffect(() => {
+        if (
+            user?.email &&
+            location.state?.addToWatchlist &&
+            location.state?.movieId === movieId
+        ) {
+           
+            fetch(`https://movie-master-pro-server-six.vercel.app/watched?email=${user.email}`)
+                .then(res => res.json())
+                .then(data => {
+                    const already = data.find(item => item.movieId === movieId);
+                    if (!already) handleWatchlist(true); // auto add without re-redirect
+                    setIsWatched(already ? true : false);
+                    navigate(location.pathname, { replace: true, state: {} });
+                });
+        }
+    }, [user]);
+
+    const handleWatchlist = (skipRedirect = false) => {
+        if (!user?.email) {
+         
+            navigate("/auth/login", {
+                state: { from: location.pathname, addToWatchlist: true, movieId },
+            });
+            return;
+        }
+
         if (isWatched) return;
 
-        const newWatched={
+        const newWatched = {
+            movieId,
+            movie: title,
+            user: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+        };
 
-            movieId : movieId,
-            movie:title,
-            
-            user:user.displayName,
-            email:user.email,
-            photo:user.photoURL
-        }
-        fetch('http://localhost:3000/watched',{
-            method:'POST',
-            headers:{
-                'content-type':'application/json'
-            },
-            body:JSON.stringify(newWatched)
+        fetch('https://movie-master-pro-server-six.vercel.app/watched', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(newWatched)
         })
-        .then(res=>res.json())
-        .then(
-            data=>{
-                console.log('after choosing',data)
-                if(data.insertedId
-){
-    
-    Swal.fire({
-  position: "top-end",
-  icon: "success",
-  title: "movie successfully added to watchlist",
-  showConfirmButton: false,
-  timer: 1500
-});
-setIsWatched(true);
-
-}
+        .then(res => res.json())
+        .then(data => {
+            if (data.insertedId) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Movie successfully added to watchlist",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                setIsWatched(true);
+                if (!skipRedirect) navigate("/watched"); 
             }
-        )
-
-    }
-
-
+        });
+    };
 
     return (
         <Container>
-            <div className='bg-amber-50'>
-            <NavBar></NavBar>
+         
+             <div className={`mb-10 ${theme === 'light' ? 'bg-blue-200  ' : 'bg-purple-200'}`}>
+                <NavBar />
+                <main>
+                    <MovieDetailsCard findMovie={findMovie} />
+                </main>
 
-            <main>
+                <div className='flex justify-between items-center px-20 mt-4'>
+                    <button
+                        disabled={isWatched}
+                        onClick={() => handleWatchlist()}
+                        className="btn btn-primary text-white"
+                    >
+                        {isWatched ? "Already in Watchlist" : "Add to Watchlist"}
+                    </button>
 
-                     <MovieDetailsCard findMovie={findMovie}></MovieDetailsCard>
-                    
-                
-            </main>
-             <div className=' flex justify-between items-center px-20 '>
-                        <button disabled={isWatched} onClick={handleWatchlist}  className="btn btn-primary text-white">
-             {isWatched ? "Already in Watchlist" : "Add to Watchlist"}
-            </button>
+                    {user && (
+                        <Link to={"/watched"} className='btn btn-primary'>GO TO YOUR WATCHLIST</Link>
+                    )}
+                </div>
 
-            <button  className='btn btn-primary text-white'>
-    <Link to={"/watched"}>
-    Go To Your watchlist
-
-    </Link>
-                           
-                        </button>
-                     </div>
-            <Footer></Footer>
-            
-        </div>
-
+                <Footer />
+            </div>
         </Container>
-        
     );
 };
 
 export default MovieDetails;
+
+
+
+
+
+
+
+
+
 
 

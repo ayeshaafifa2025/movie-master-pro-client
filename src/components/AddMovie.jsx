@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router';
 import NavBar from './NavBar';
 import Footer from './Footer';
@@ -8,9 +8,11 @@ import { AuthContext } from '../provider/AuthContext';
 import Swal from 'sweetalert2';
 import Container from './Container';
 import Loading from '../pages/Loading';
+import { ThemeContext } from '../Layouts/ThemeProvider';
 
 
 const AddMovie = () => {
+    const { theme } = useContext(ThemeContext);
 
     const {user}=use(AuthContext);
     const [loading, setLoading] = useState(false);
@@ -54,7 +56,7 @@ const AddMovie = () => {
     createdAt,
 
       }
-    fetch('http://localhost:3000/popular',{
+    fetch('https://movie-master-pro-server-six.vercel.app/popular',{
         method: 'POST',
         headers:{
             'content-type':'application/json'
@@ -83,12 +85,13 @@ const AddMovie = () => {
     }
     return (
         <Container>
-            <div>
+            {/* <div> */}
+             <div className={` ${theme === 'light' ? 'bg-blue-400  ' : 'bg-purple-200'}`}>
         <NavBar></NavBar>
         
 {
     loading? <Loading></Loading>: (<main>
-            <div className="min-h-screen bg-gradient-to-br from-blue-100 to-blue-300 flex items-center justify-center p-6">
+            <div className="min-h-screen  flex items-center justify-center p-6">
 <div className="w-full max-w-lg bg-white rounded-3xl shadow-2xl p-8 border border-blue-200">
 <h1 className="text-4xl font-bold text-center mb-6 text-black">Create A Movie</h1>
 

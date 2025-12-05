@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../Layouts/ThemeProvider';
 
 const AboutPlatform = () => {
+    const { theme } = useContext(ThemeContext);
     return (
-        <div className="p-6  mt-10 mb-10 mx-auto rounded-2xl bg-purple-400">
+        // <div className="p-6  mt-10 mb-10 mx-auto rounded-2xl bg-purple-400">
+        <div className={`mb-10 mt-10 p-6 mx-auto rounded-2xl ${theme === 'light' ? 'bg-blue-200  ' : 'bg-purple-400'}`}>
             <h1 className="text-3xl font-bold mb-5 text-black text-center">About This Platform</h1>
 
             <div className=' grid grid-cols-1 md:grid-cols-2 gap-20   justify-between items-center'>
@@ -10,12 +13,12 @@ const AboutPlatform = () => {
                 <img
                     src="https://moviesmedia.ign.com/movies/image/article/121/1216165/9-tron-legacy_1326253207.jpg" 
                     alt="Platform Banner"
-                    className="w-full h-80 mb-10 object-cover rounded-xl shadow-md"
+                    className="w-full h-100 mb-10 object-cover rounded-xl shadow-md"
                 />
                 <img
-                    src="https://webneel.com/wnet/file/images/11-16/3-jungle-book-movie-poster-design.jpg" 
+                    src="https://m.media-amazon.com/images/M/MV5BNTY4YjYwYzMtYTg1NC00ZmJiLTk0OTYtMWMzM2Y4Yzc5MDc2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" 
                     alt="Platform Banner"
-                    className="w-full h-80 object-cover rounded-xl shadow-md"
+                    className="w-full h-100 object-cover rounded-xl shadow-md"
                 />
             </div>
 

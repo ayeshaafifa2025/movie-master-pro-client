@@ -1,14 +1,17 @@
-import React, { use } from 'react';
+import React, { use, useContext } from 'react';
+import { ThemeContext } from '../Layouts/ThemeProvider';
 
 
 const Counter = ({data,userCountPromise}) => {
+  const { theme } = useContext(ThemeContext);
     const data1= use(userCountPromise);
-    // console.log(data,data1);
+ 
   
    
    
     return (
-      <div className='bg-amber-100 py-5 mb-10 rounded-xl'>
+      
+      <div className={`py-5 mb-10 rounded-xl ${theme === 'light' ? 'bg-blue-200  ' : 'bg-purple-400'}`}>
         <h1 className='text-3xl  text-center text-black font-bold' >Our Total Movies And Users
                 </h1>
               <div className="grid grid-cols-1 md:grid-cols-2  px-20 py-5 gap-20 my-[50px]">

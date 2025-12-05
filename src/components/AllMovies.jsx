@@ -1,13 +1,15 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import Movie from './Movie';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import { useLoaderData } from 'react-router';
 import Container from './Container';
+import { ThemeContext } from '../Layouts/ThemeProvider';
 
 const AllMovies = () => {
+    const { theme } = useContext(ThemeContext);
     const initialData = useLoaderData(); 
     
     const [movies, setMovies] = useState(initialData);
@@ -36,9 +38,10 @@ const AllMovies = () => {
     return (
 
         <Container>
-<div className='bg-pink-100 '>
+
+ <div className={` ${theme === 'light' ? 'bg-blue-200  ' : 'bg-purple-400'}`}>
             <NavBar />
-            <div className='p-4'>
+            <div className='p-4 flex justify-between items-center'>
                 <label className="mr-4 text-black">
                     <select value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)} className="border p-2 ml-2">
                         <option value="">ALL</option>
@@ -75,7 +78,9 @@ const AllMovies = () => {
                 </label>
             </div>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
+             gap-8 px-10 py-10 rounded-xl mx-auto 
+             justify-items-center'>
                 {
                     movies.map(movie => <Movie key={movie._id} movie={movie} />)
                 }

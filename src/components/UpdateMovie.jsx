@@ -1,4 +1,4 @@
-import React, { use , useState} from 'react';
+import React, { use , useContext, useState} from 'react';
 import NavBar from './NavBar';
 import { Link, useLoaderData } from 'react-router';
 import Footer from './Footer';
@@ -6,8 +6,10 @@ import { AuthContext } from '../provider/AuthContext';
 import { toast } from 'react-toastify';
 import Container from './Container';
 import Loading from '../pages/Loading';
+import { ThemeContext } from '../Layouts/ThemeProvider';
 
 const UpdateMovie = () => {
+    const { theme } = useContext(ThemeContext);
     const movie= useLoaderData();
     const [loading, setLoading] = useState(false);
     console.log (movie);
@@ -51,7 +53,7 @@ const UpdateMovie = () => {
             createdAt
 
         }
-        fetch(`http://localhost:3000/update/${movie._id}`,{
+        fetch(`https://movie-master-pro-server-six.vercel.app/update/${movie._id}`,{
             method:'PATCH',
             headers:{
                 'content-type':'application/json'
@@ -74,7 +76,8 @@ const UpdateMovie = () => {
     }
     return (
         <Container>
-<div className='bg-amber-50'>
+{/* <div className=''> */}
+ <div className={` ${theme === 'light' ? 'bg-blue-400  ' : 'bg-purple-200'}`}>
           
             <div>
         <NavBar></NavBar>

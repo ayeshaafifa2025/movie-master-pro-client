@@ -10,15 +10,18 @@ import userImg from '../assets/user 1.png';
 import { IoMdClose } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsThreeDotsVertical } from 'react-icons/bs';
+import { ThemeContext } from '../Layouts/ThemeProvider';
 
 
 
 const NavBar = () => {
+
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const { user, loading, logOut } = useContext(AuthContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);  
   const [sidebarOpen, setSidebarOpen] = useState(false);    
   const [threeDotOpen, setThreeDotOpen] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
+
  
   useEffect(() => {
     const html = document.querySelector('html')
@@ -26,10 +29,7 @@ const NavBar = () => {
      localStorage.setItem("theme", theme)
   }, [theme])
 
-  const handleTheme = (checked) => {
-    setTheme(checked ? "dark": "light")
-  }
-
+ 
 
   const handleLogOut = () => {
     logOut()
@@ -46,17 +46,25 @@ const NavBar = () => {
 
   
  <div>
-      <nav className="relative flex mb-10 items-center rounded-2xl justify-between px-4 py-4 bg-pink-500 shadow-md">
+     
+       <nav
+  className={`relative flex mb-10 items-center justify-between px-4 py-4 shadow-md
+    ${theme === "light" ? "bg-blue-300" : "bg-purple-300"}`}
+>
 
-        <input
-           onChange={(e)=> handleTheme(e.target.checked)}
-           type="checkbox"
-           defaultChecked={localStorage.getItem('theme') === "dark"}
-           className="toggle"/>
+      
+
+            <input
+        type="checkbox"
+        checked={theme === 'dark'}
+        onChange={toggleTheme}
+        className="toggle"
+      />
 
 
 
         <button className="md:hidden text-white text-2xl" onClick={() => setSidebarOpen(true)}>
+          <GiHamburgerMenu />
         </button>
 
         <h2 className="text-3xl font-extrabold text-white tracking-wide mx-auto md:mx-0">
@@ -71,6 +79,14 @@ const NavBar = () => {
             <NavLink className="nav-link link link-hover font-extrabold text-blue-600" to="/movies">All Movies</NavLink>
             <NavLink className="nav-link link link-hover font-extrabold text-blue-600" to="/my-collection">My Collection</NavLink>
             <NavLink className='nav-link link link-hover font-extrabold text-blue-600' to="/movies/add">Create a movie</NavLink>
+            {
+                user &&
+                <Link className='nav-link link link-hover font-extrabold text-blue-600' to={"/watched"}>
+                Go To Your watchlist
+                </Link>
+                                       
+                                   
+            }
             
           </div>
         )}
@@ -140,6 +156,14 @@ const NavBar = () => {
           <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/movies">All Movies</NavLink>
           <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/my-collection">My Collection</NavLink>
           <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/movies/add">Create a movie</NavLink>
+           {
+                user &&
+                <Link className='font-bold text-green-600 link link-hover' to={"/watched"}>
+                Go To Your watchlist
+                </Link>
+                                       
+                                   
+            }
           
         </nav>
       </div>

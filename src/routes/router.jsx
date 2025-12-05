@@ -14,10 +14,12 @@ import MyCollection from "../components/MyCollection";
 import AddMovie from "../components/AddMovie";
 import UpdateMovie from "../components/UpdateMovie";
 import MovieDetails from "../components/MovieDetails";
-import Watchlist from "../components/Watchlist";
+
 
 import PrivateRoute from "../provider/PrivateRoute";
 import MyCollectionDetails from "../components/MyCollectionDetails";
+import Watchlist from "../components/Watchlist";
+import Error from "../pages/Error";
 
 
 
@@ -29,7 +31,7 @@ const router = createBrowserRouter(
             element: <HomeLayout></HomeLayout>,
             children: [
                 {
-                    loader:()=>fetch("http://localhost:3000/movies"),
+                    loader:()=>fetch("https://movie-master-pro-server-six.vercel.app/movies"),
                     index: true,
                     
                     path: "/",
@@ -55,7 +57,7 @@ const router = createBrowserRouter(
         ]
     },
     {
-        loader:()=>fetch("http://localhost:3000/movies"),
+        loader:()=>fetch("https://movie-master-pro-server-six.vercel.app/movies"),
         path:"/movies",
         element:<AllMovies></AllMovies>
         
@@ -69,7 +71,7 @@ const router = createBrowserRouter(
                 element:<PrivateRoute><MyCollection></MyCollection></PrivateRoute>
             },
      {
-        loader:({params})=>fetch(`http://localhost:3000/popular/${params.id}`),
+        loader:({params})=>fetch(`https://movie-master-pro-server-six.vercel.app/popular/${params.id}`),
                 path:"/popular/:id",
                 element:<PrivateRoute><MyCollectionDetails></MyCollectionDetails></PrivateRoute>
             },
@@ -78,12 +80,12 @@ const router = createBrowserRouter(
                 element:<PrivateRoute><AddMovie></AddMovie></PrivateRoute>
             },
             {
-                loader:({params})=>fetch(`http://localhost:3000/popular/${params.id}`),
+                loader:({params})=>fetch(`https://movie-master-pro-server-six.vercel.app/popular/${params.id}`),
                 path:"/update/:id",
                 element:<PrivateRoute><UpdateMovie></UpdateMovie></PrivateRoute>
             },
             {
-                loader:({params})=>fetch(`http://localhost:3000/movies/${params.id}`),
+                loader:({params})=>fetch(`https://movie-master-pro-server-six.vercel.app/movies/${params.id}`),
                 path:"/movies/:id",
                 
                 element:<MovieDetails></MovieDetails>
@@ -113,19 +115,19 @@ const router = createBrowserRouter(
         
     }
     ,
-    
-    
+   
    
    {
-        // loader:()=>fetch("http://localhost:3000/watched"),
+        // loader:()=>fetch("https://movie-master-pro-server-six.vercel.app/watched"),
         
         
                 path:"/watched",
-                element:<PrivateRoute><Watchlist></Watchlist></PrivateRoute>
+                element:<Watchlist></Watchlist>
             },
+          
     {
         path: "/*",
-        element: <h3>Error404</h3>
+        element: <Error></Error>
     }
 
 

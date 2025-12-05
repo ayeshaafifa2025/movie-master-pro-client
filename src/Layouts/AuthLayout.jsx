@@ -8,7 +8,7 @@ const AuthLayout = () => {
     return (
 
         <Container>
-  <div className='bg-amber-50'>
+  <div className=''>
              <div>
             <header>
                 

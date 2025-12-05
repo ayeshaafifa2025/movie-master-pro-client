@@ -1,11 +1,13 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../Layouts/ThemeProvider";
 
 const Genre = () => {
   const [genres, setGenres] = useState([]);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
-    fetch("http://localhost:3000/movies")
+    fetch("https://movie-master-pro-server-six.vercel.app/movies")
       .then(res => res.json())
       .then(data => {
         
@@ -20,7 +22,8 @@ const Genre = () => {
   }, []);
 
   return (
-    <div className="bg-purple-800 text-white rounded-xl">
+  
+    <div className={`text-black rounded-xl ${theme === 'light' ? 'bg-blue-200  ' : 'bg-purple-400'}`}>
         <aside>
 <div style={{ padding: "20px", textAlign: "center" }}>
       <h1 className="text-3xl text-black font-bold mb-5">Our Movie Categories</h1>

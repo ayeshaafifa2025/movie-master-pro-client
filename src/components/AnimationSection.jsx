@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../Layouts/ThemeProvider';
 
 const AnimationSection = () => {
+  const { theme } = useContext(ThemeContext);
   const features = [
     "40+ enjoyable movies",
     "Filter by genre",
@@ -19,7 +21,9 @@ const AnimationSection = () => {
   ];
 
   return (
-    <section className="py-8 rounded-xl bg-gray-200">
+  
+      <section  className={`py-8 rounded-xl ${theme === 'light' ? 'bg-blue-200  ' : 'bg-purple-400'}`}>
+    
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-3xl sm:text-3xl font-bold mb-22  text-black">
           Platform Features

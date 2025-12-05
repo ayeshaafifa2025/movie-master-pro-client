@@ -7,6 +7,7 @@ import AuthProvider from './provider/AuthProvider.jsx'
 import { ToastContainer } from 'react-toastify';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import ThemeProvider from './Layouts/ThemeProvider.jsx'
 
 const Root = () => {
   useEffect(() => {
@@ -17,10 +18,14 @@ const Root = () => {
   }, []);
 
   return (
-    <AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
       <RouterProvider router={router} />
       <ToastContainer />
     </AuthProvider>
+
+    </ThemeProvider>
+    
   );
 };
 
