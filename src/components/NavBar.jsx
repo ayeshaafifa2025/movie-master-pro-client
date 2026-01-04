@@ -1,186 +1,171 @@
 
 
 
-import React, { useState, useContext, useEffect } from 'react';
-import { Link, NavLink } from 'react-router';
-import { AuthContext } from '../provider/AuthContext';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
-import Loading from '../pages/Loading';
 import userImg from '../assets/user 1.png';
-import { IoMdClose } from "react-icons/io";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { BsThreeDotsVertical } from 'react-icons/bs';
+
+import { AuthContext } from '../provider/AuthContext';
 import { ThemeContext } from '../Layouts/ThemeProvider';
 
 
-
 const NavBar = () => {
+    const { theme, toggleTheme } = useContext(ThemeContext);
+    const { user, loading, logOut } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const { theme, toggleTheme } = useContext(ThemeContext);
-  const { user, loading, logOut } = useContext(AuthContext);
-  const [dropdownOpen, setDropdownOpen] = useState(false);  
-  const [sidebarOpen, setSidebarOpen] = useState(false);    
-  const [threeDotOpen, setThreeDotOpen] = useState(false);
+    useEffect(() => {
+        const html = document.querySelector('html')
+        html.setAttribute("data-theme", theme)
+        localStorage.setItem("theme", theme)
+    }, [theme])
 
- 
-  useEffect(() => {
-    const html = document.querySelector('html')
-     html.setAttribute("data-theme", theme)
-     localStorage.setItem("theme", theme)
-  }, [theme])
-
- 
-
-  const handleLogOut = () => {
-    logOut()
-      .then(() => {
-        toast('You Logged Out successfully');
+    const handleLogOut = () => {
         setDropdownOpen(false);
-        setThreeDotOpen(false);
-        setSidebarOpen(false);
-      })
-      .catch((err) => {});
-  };
+        logOut()
+            .then(() => {
+                toast.success('Successfully logged out!');
+                navigate('/');
+            })
+            .catch(error => {
+                console.error("Logout Failed:", error);
+                toast.error('Logout failed: ' + error.message);
+            });
+    }
 
-  return (
+    const closeDropdown = () => {
+        setTimeout(() => {
+            setDropdownOpen(false);
+        }, 100);
+    };
 
-  
- <div>
-     
-       <nav
-  className={`relative flex mb-10 items-center justify-between px-4 py-4 shadow-md
-    ${theme === "light" ? "bg-blue-300" : "bg-purple-300"}`}
->
-
-      
-
-            <input
-        type="checkbox"
-        checked={theme === 'dark'}
-        onChange={toggleTheme}
-        className="toggle"
-      />
-
-
-
-        <button className="md:hidden text-white text-2xl" onClick={() => setSidebarOpen(true)}>
-          <GiHamburgerMenu />
-        </button>
-
-        <h2 className="text-3xl font-extrabold text-white tracking-wide mx-auto md:mx-0">
-            <span className='text-purple-700'>FilmFusion</span> <span className='text-pink-700'>Pro</span>
-          
-        </h2>
-
+    const links = <>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/movies">All Movies</NavLink></li>
+          <li>
+            <NavLink to="/quick/about" className="nav-link">
+              About Us
+            </NavLink>
+          </li>
+         
+          <li>
+            <NavLink to="/quick/terms" className="nav-link">
+              Terms & Conditions
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/quick/privacy" className="nav-link">
+              Privacy Policy
+            </NavLink>
+          </li>
+        {/* <li><NavLink to="/about">About Us</NavLink></li>  */}
         
-        {!loading && (
-          <div className="hidden md:flex gap-5 mx-auto">
-            <NavLink className="nav-link link link-hover font-extrabold text-blue-600" to="/">Home</NavLink>
-            <NavLink className="nav-link link link-hover font-extrabold text-blue-600" to="/movies">All Movies</NavLink>
-            <NavLink className="nav-link link link-hover font-extrabold text-blue-600" to="/my-collection">My Collection</NavLink>
-            <NavLink className='nav-link link link-hover font-extrabold text-blue-600' to="/movies/add">Create a movie</NavLink>
-            {
-                user &&
-                <Link className='nav-link link link-hover font-extrabold text-blue-600' to={"/watched"}>
-                Go To Your watchlist
-                </Link>
-                                       
-                                   
-            }
-            
-          </div>
+        {user && (
+            <>
+                <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+                {/* <li><NavLink to="/my-collection">My Collection</NavLink></li>
+                <li><NavLink to="/movies/add">Create a movie</NavLink></li>
+                <li><Link to="/watched">Watchlist</Link></li>  */}
+            </>
         )}
+    </>
 
-       
-        {!loading && (
-          <div className="hidden md:flex items-center gap-3 relative">
-            {user ? (
-              <div>
-                <img
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="w-12 h-12 rounded-full cursor-pointer border-2 border-white object-cover"
-                  src={user.photoURL || userImg}
-                  alt="User"
-                />
-                {dropdownOpen && (
-                  <div className="absolute right-0 mt-16 w-56 bg-white rounded-lg shadow-lg p-3 z-50">
-                    <p className="font-semibold text-gray-500">{user.displayName || 'User'}</p>
-                    <p className="text-sm text-gray-500">{user.email}</p>
-                    
-                    <button onClick={handleLogOut} className="w-full py-1 bg-red-500 text-white rounded-md mt-2">Logout</button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <>
-                <img className="w-12 h-12 rounded-full" src={userImg} alt="Demo" />
-                <Link to="/auth/login" className="btn btn-primary px-4">Login</Link>
-                <Link to="/auth/register" className="btn btn-primary px-4">Register</Link>
-              </>
-            )}
-          </div>
-        )}
+    return (
+        <div className={`sticky top-0 mb-2 z-50 shadow-md ${theme === "light" ? "bg-gray-100" : "bg-gray-400"}`}>
+            <div className="navbar  mx-auto px-5 md:px-10 lg:px-20">
+                
+                <div className="navbar-start">
+                    <div className="dropdown">
+                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+                        </div>
+                        <ul
+                            tabIndex={0}
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                        >
+                            {links}
+                        </ul>
+                    </div>
 
-      
-        <div className="md:hidden relative">
-          <button className="text-white text-2xl" onClick={() => setThreeDotOpen(!threeDotOpen)}><BsThreeDotsVertical /></button>
-          {threeDotOpen && (
-            <div className="absolute right-0 mt-12 w-56 bg-white rounded-lg shadow-lg p-3 z-50">
-              {user ? (
-                <>
-                  <img className="w-12 h-12 rounded-full mb-2" src={user.photoURL || userImg} alt="User" />
-                  <p className="font-semibold text-gray-500">{user.displayName || 'User'}</p>
-                  <p className="text-sm text-gray-500">{user.email}</p>
-                  <button onClick={handleLogOut} className="w-full py-1 bg-red-500 text-white rounded-md mt-2">Logout</button>
-                </>
-              ) : (
-                <>
-                  <img className="w-12 h-12 rounded-full mb-2" src={userImg} alt="Demo" />
-                  <Link to="/auth/login" onClick={() => setThreeDotOpen(false)} className="btn btn-primary w-full mb-2">Login</Link>
-                  <Link to="/auth/register" onClick={() => setThreeDotOpen(false)} className="btn btn-primary w-full">Register</Link>
-                </>
-              )}
+                    <div className='flex items-center'>
+                        <input
+                            type="checkbox"
+                            checked={theme === 'dark'}
+                            onChange={toggleTheme}
+                            className="toggle toggle-sm mr-3"
+                        />
+                        <span className="text-xl font-bold">
+                            <span className='text-purple-700'>FilmFusion</span> <span className='text-pink-700'>Pro</span> 
+                        </span>
+                    </div>
+                </div>
+
+                <div className="navbar-center hidden lg:flex">
+                    <ul className="menu menu-horizontal px-1 font-semibold space-x-2">
+                        {links}
+                    </ul>
+                </div>
+                
+                <div className="navbar-end gap-2">
+                    {user ? (
+                        <div className='flex items-center gap-2'>
+                            
+                            <button 
+                                onClick={handleLogOut} 
+                                className="btn btn-sm btn-error hidden md:inline-flex"
+                            >
+                                Log Out
+                            </button>
+                            
+                            <div className="relative">
+                                <img
+                                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                                    onBlur={closeDropdown}
+                                    className="w-10 h-10 rounded-full cursor-pointer object-cover border-2 border-primary"
+                                    src={user?.photoURL || userImg}
+                                    alt="User Avatar"
+                                    tabIndex={0}
+                                />
+                                
+                                {dropdownOpen && (
+                                    <div className="absolute right-0 top-12 w-56 bg-base-100 rounded-box shadow-xl p-3 z-[100] border border-gray-200">
+                                        <p className="font-semibold text-gray-500 break-words">{user?.displayName || 'User'}</p>
+                                        <p className="text-sm text-gray-500 mb-2 break-words">{user?.email}</p>
+                                        
+                                        <div className='divider my-1'></div>
+{/*                                         
+                                        <Link 
+                                            to="/dashboard" 
+                                            onClick={closeDropdown} 
+                                            className='btn btn-ghost btn-sm w-full justify-start text-sm hover:bg-base-200'
+                                        >
+                                            Dashboard
+                                        </Link> */}
+                                        <button 
+                                            onClick={handleLogOut} 
+                                            className='btn btn-ghost btn-sm w-full justify-start text-sm hover:bg-base-200 md:hidden'
+                                        >
+                                            Log Out
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    ) : (
+                        <div className='flex items-center gap-2'>
+                            <Link className='btn btn-sm btn-primary' to="/auth/login">Log in</Link>
+                            <Link className='btn btn-sm btn-secondary hidden sm:inline-flex' to="/auth/register">Register</Link>
+                        </div>
+                    )}
+                </div>
             </div>
-          )}
         </div>
-      </nav>
-
-      
-      <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-2xl transform transition-transform duration-300 z-50 p-5
-          ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
-      >
-        <button className="text-2xl mb-4" onClick={() => setSidebarOpen(false)}><IoMdClose /></button>
-        <nav className="flex flex-col gap-3 text-lg">
-          <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/">Home</NavLink>
-          <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/movies">All Movies</NavLink>
-          <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/my-collection">My Collection</NavLink>
-          <NavLink className='font-bold text-green-600 link link-hover' onClick={() => setSidebarOpen(false)} to="/movies/add">Create a movie</NavLink>
-           {
-                user &&
-                <Link className='font-bold text-green-600 link link-hover' to={"/watched"}>
-                Go To Your watchlist
-                </Link>
-                                       
-                                   
-            }
-          
-        </nav>
-      </div>
-
-     
-      {sidebarOpen && <div className="fixed inset-0 bg-black/40 z-40" onClick={() => setSidebarOpen(false)}></div>}
-    </div>
-   
-   
-  );
+    );
 };
 
 export default NavBar;
-
-
-
-
 
 
 

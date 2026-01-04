@@ -12,7 +12,7 @@ const MyCollectionDetails = () => {
     return (
         <Container>
 
- <div className={` ${theme === 'light' ? 'bg-blue-400  ' : 'bg-purple-200'}`}>
+ <div className={` ${theme === 'light' ? 'bg-gray-100  ' : 'bg-gray-400'}`}>
            <MyCollectionCard findMovie={findMovie}></MyCollectionCard>
             
         </div>

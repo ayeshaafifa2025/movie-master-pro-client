@@ -1,5 +1,6 @@
 
 
+
 import React, { useRef, useState, useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -11,6 +12,10 @@ import { ThemeContext } from '../Layouts/ThemeProvider';
 
 const Provider = new GoogleAuthProvider();
 
+
+const DEMO_EMAIL = "demouser@film.com";
+const DEMO_PASSWORD = "DemoUser123";
+
 const Login = () => {
     const {theme} = useContext(ThemeContext)
     const { signIn } = useContext(AuthContext);
@@ -19,7 +24,10 @@ const Login = () => {
 
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    
+
     const emailRef = useRef();
+    const passwordRef = useRef(); 
 
     const redirectAfterLogin = () => {
         if (location.state?.from) {
@@ -48,6 +56,19 @@ const Login = () => {
                 });
             })
             .catch(err => console.log(err));
+    };
+
+  
+    const handleAutoFillDemo = () => {
+        if (emailRef.current) {
+            emailRef.current.value = DEMO_EMAIL;
+        }
+       
+        const passwordInput = document.querySelector('input[name="password"]');
+        if (passwordInput) {
+            passwordInput.value = DEMO_PASSWORD;
+        }
+        toast.info("Demo credentials loaded! Click Login to proceed.");
     };
 
     const handleLogin = (e) => {
@@ -84,8 +105,7 @@ const Login = () => {
     };
 
     return (
-        // <div className="hero bg-base-200 min-h-screen">
-         <div className={` hero min-h-screen ${theme === 'light' ? 'bg-blue-400  ' : 'bg-purple-200'}`}>
+        <div className={` hero min-h-screen ${theme === 'light' ? 'bg-gray-100  ' : 'bg-gray-400'}`}>
             <div className="hero-content flex-col">
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Login</h1>
@@ -98,7 +118,7 @@ const Login = () => {
                                 <input
                                     name="email"
                                     type="email"
-                                    ref={emailRef}
+                                    ref={emailRef} 
                                     className="input"
                                     placeholder="Email"
                                     required
@@ -111,6 +131,7 @@ const Login = () => {
                                         className="input"
                                         placeholder="Password"
                                         required
+                                       
                                     />
                                     <button
                                         onClick={handleTogglePasswordShow}
@@ -121,7 +142,15 @@ const Login = () => {
                                 </div>
                                 <div><a className="link link-hover text-black">Forgot password?</a></div>
                                 {error && <p className='text-red-700 text-center'>{error}</p>}
-                                <button type='submit' className="btn btn-neutral mt-4">Login</button>
+                                <button type='submit' className="btn btn-neutral mt-4 w-full">Login</button>
+
+                               
+                                <button type='button' onClick={handleAutoFillDemo} className="btn btn-warning btn-outline mt-2 w-full text-sm">
+                                    Demo Login (Auto-Fill)
+                                </button>
+                                
+                                <div className="divider text-black">OR</div>
+
                                 <p className="font-semibold text-center text-black pt-5">
                                     Don’t Have An Account?{" "}
                                     <Link className="font-bold text-red-600 link link-hover" to="/auth/register">
@@ -139,6 +168,7 @@ const Login = () => {
 };
 
 export default Login;
+
 
 
 

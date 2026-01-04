@@ -22,7 +22,7 @@ const AnimationSection = () => {
 
   return (
   
-      <section  className={`py-8 rounded-xl ${theme === 'light' ? 'bg-blue-200  ' : 'bg-purple-400'}`}>
+      <section  className={`py-8 mb-2 rounded-xl ${theme === 'light' ? 'bg-gray-100  ' : 'bg-gray-400'}`}>
     
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-3xl sm:text-3xl font-bold mb-22  text-black">

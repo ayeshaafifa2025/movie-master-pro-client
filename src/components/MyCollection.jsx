@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../provider/AuthContext";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+// import NavBar from "./NavBar";
+// import Footer from "./Footer";
 import MySingle from "./MySingle";
 import Swal from "sweetalert2";
 import Container from "./Container";
@@ -62,11 +62,11 @@ const MyCollection = () => {
   return (
     <Container>
     
-       <div className={` ${theme === 'light' ? 'bg-blue-400  ' : 'bg-purple-200'}`}>
-      <NavBar />
+       <div className={` ${theme === 'light' ? 'bg-gray-100  ' : 'bg-gray-400'}`}>
+      {/* <NavBar /> */}
       <menu>
         <h1 className="text-3xl font-bold text-center text-black">My Collection: {collection.length}</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6
              gap-8 px-10 py-10 rounded-xl mx-auto 
              justify-items-center">
           {collection.map(single => (
@@ -76,7 +76,7 @@ const MyCollection = () => {
         </div>
        
       </menu>
-      <Footer />
+      {/* <Footer /> */}
     </div>
 
     </Container>

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router';
-import NavBar from './NavBar';
-import Footer from './Footer';
+// import NavBar from './NavBar';
+// import Footer from './Footer';
 import { Language } from 'firebase/ai';
 import { use } from 'react';
 import { AuthContext } from '../provider/AuthContext';
@@ -85,9 +85,9 @@ const AddMovie = () => {
     }
     return (
         <Container>
-            {/* <div> */}
-             <div className={` ${theme === 'light' ? 'bg-blue-400  ' : 'bg-purple-200'}`}>
-        <NavBar></NavBar>
+           
+             <div className={` ${theme === 'light' ? 'bg-gray-100  ' : 'bg-gray-400'}`}>
+        {/* <NavBar></NavBar> */}
         
 {
     loading? <Loading></Loading>: (<main>
@@ -211,7 +211,7 @@ const AddMovie = () => {
       </div>
         
 
-        <Footer></Footer>
+        {/* <Footer></Footer> */}
 
         </div>
 

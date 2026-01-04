@@ -23,7 +23,7 @@ const Genre = () => {
 
   return (
   
-    <div className={`text-black rounded-xl ${theme === 'light' ? 'bg-blue-200  ' : 'bg-purple-400'}`}>
+    <div className={`text-black mb-2 rounded-xl ${theme === 'light' ? 'bg-gray-100  ' : 'bg-gray-400'}`}>
         <aside>
 <div style={{ padding: "20px", textAlign: "center" }}>
       <h1 className="text-3xl text-black font-bold mb-5">Our Movie Categories</h1>

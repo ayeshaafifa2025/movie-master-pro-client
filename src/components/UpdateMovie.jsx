@@ -77,7 +77,7 @@ const UpdateMovie = () => {
     return (
         <Container>
 {/* <div className=''> */}
- <div className={` ${theme === 'light' ? 'bg-blue-400  ' : 'bg-purple-200'}`}>
+ <div className={` ${theme === 'light' ? 'bg-gray-100  ' : 'bg-gray-400'}`}>
           
             <div>
         <NavBar></NavBar>

@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../provider/AuthContext";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+// import NavBar from "./NavBar";
+// import Footer from "./Footer";
 import Watched from "./Watched";
 import Container from "./Container";
 import { ThemeContext } from "../Layouts/ThemeProvider";
@@ -31,17 +31,17 @@ const Watchlist = () => {
 
     <Container>
 {/* <div className=""> */}
- <div className={` ${theme === 'light' ? 'bg-blue-400  ' : 'bg-purple-200'}`}>
-      <NavBar />
+ <div className={` ${theme === 'light' ? 'bg-gray-100  ' : 'bg-gray-400'}`}>
+      {/* <NavBar /> */}
       <menu className="px-10 py-10 ">
         <h1 className="text-3xl text-black text-center font-bold">My Watchlist: {watchlist.length}</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
           {watchlist.map(one => (
             <Watched key={one._id} one={one} />
           ))}
         </div>
       </menu>
-      <Footer />
+      {/* <Footer /> */}
     </div>
     </Container>
     

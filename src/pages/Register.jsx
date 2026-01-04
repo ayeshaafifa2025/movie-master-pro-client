@@ -150,7 +150,7 @@ setUser(user)
         <div>
 <div>
             {/* <div className="hero bg-base-200 min-h-screen"> */}
-             <div className={` hero min-h-screen ${theme === 'light' ? 'bg-blue-400  ' : 'bg-purple-200'}`}>
+             <div className={` hero min-h-screen ${theme === 'light' ? 'bg-gray-100  ' : 'bg-gray-400'}`}>
   <div className="hero-content flex-col ">
     <div className="text-center lg:text-left">
       <h1 className="text-5xl font-bold">Register</h1>
@@ -221,3 +221,4 @@ setUser(user)
 };
 
 export default Register;
+

@@ -1,2 +1,25 @@
+/* @import "tailwindcss";
+@plugin "daisyui"; */
+
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+   themes: light --default;
+};
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #1A1A2E;
+  --color-secondary: #F8F8F8;
+  --color-ternary: #D1D5DB;
+  --color-button: #00A9AE
+
+}
+
+
+body {
+  font-family: "Urbanist", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}

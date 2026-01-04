@@ -10,7 +10,7 @@ const Hero = ({heroPromise}) => {
     return (
       
 
-         <div className={`mb-10 py-10 px-10 ${theme === 'light' ? 'bg-blue-200  ' : 'bg-purple-400'}`}>
+         <div className={`mb-2 py-10 px-10 ${theme === 'light' ? 'bg-gray-100  ' : 'bg-gray-400'}`}>
       <h1 className={`text-center font-bold text-3xl mb-5 ${theme === 'light' ? 'text-black' : 'text-white'}`}>
         Featured Movies
       </h1>

@@ -6,7 +6,7 @@ const MySingle = ({ single, handleDelete }) => {
   return (
 
 
-<div className="max-w-sm h-full flex flex-col rounded overflow-hidden shadow-lg m-4 bg-pink-200 p-6">
+<div className="max-w-sm h-full flex flex-col rounded overflow-hidden shadow-lg m-4 bg-gray-300 p-6">
   <img
     className="w-full h-60 object-cover rounded-xl"
     src={single.posterUrl}

@@ -10,6 +10,9 @@ import Container from '../components/Container';
 
 
 
+
+
+
 const heroPromise = fetch("https://movie-master-pro-server-six.vercel.app/hero")
 .then(data=>data.json());
 
@@ -17,17 +20,21 @@ const heroPromise = fetch("https://movie-master-pro-server-six.vercel.app/hero")
 
 const HomeLayout = () => {
     return (
+        <div>
+            <NavBar></NavBar>
+        
+        <div className="overflow-x-hidden">
+             
+             <Hero heroPromise={heroPromise}></Hero>
         <Container>
             <div className=''>
     <header>
-                <nav>
-                    <NavBar></NavBar>
-                </nav>
-                <Hero heroPromise={heroPromise}></Hero>
+              
+                
 
             </header>
             <main>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb2">
                     <div className="md:col-span-1">
 <aside>
                     
@@ -48,6 +55,7 @@ const HomeLayout = () => {
             
                
                 <Outlet></Outlet>
+               
                 <AboutPlatform></AboutPlatform>
 
 
@@ -60,6 +68,8 @@ const HomeLayout = () => {
             
         
         </Container>
+        </div>
+        </div>
         
     );
 };

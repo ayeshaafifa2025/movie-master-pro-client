@@ -10,7 +10,7 @@ const Footer = () => {
     return (
         <div>
           
-            <div className={`mt-10 py-5 ${theme === 'light' ? 'bg-blue-200  ' : 'bg-purple-400'}`}>
+            <div className={` py-5 ${theme === 'light' ? 'bg-gray-100  ' : 'bg-gray-400'}`}>
               <h1 className='text-3xl mb-5 font-bold mt-5 text-center text-black '>Our Details</h1>
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -31,26 +31,12 @@ const Footer = () => {
   
 
 <ul className="space-y-2 text-black">
-  <li>
-    <NavLink to="/quick/about" className="nav-link">
-      About Us
-    </NavLink>
-  </li>
-  <li>
+   <li>
     <NavLink to="/quick/contact" className="nav-link">
       Contact Us
     </NavLink>
   </li>
-  <li>
-    <NavLink to="/quick/terms" className="nav-link">
-      Terms & Conditions
-    </NavLink>
-  </li>
-  <li>
-    <NavLink to="/quick/privacy" className="nav-link">
-      Privacy Policy
-    </NavLink>
-  </li>
+
 </ul>
 
 
