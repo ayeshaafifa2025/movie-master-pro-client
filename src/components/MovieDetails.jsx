@@ -84,7 +84,7 @@ const MovieDetails = () => {
                     timer: 1500
                 });
                 setIsWatched(true);
-                if (!skipRedirect) navigate("/watched"); 
+                if (!skipRedirect) navigate("/dashboard/watched"); 
             }
         });
     };
