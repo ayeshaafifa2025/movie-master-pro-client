@@ -66,9 +66,8 @@ const MyCollection = () => {
       {/* <NavBar /> */}
       <menu>
         <h1 className="text-3xl font-bold text-center text-black">My Collection: {collection.length}</h1>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6
-             gap-8 px-10 py-10 rounded-xl mx-auto 
-             justify-items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6
+             gap-4 md:gap-6 px-4 py-5 mx-auto justify-items-center">
           {collection.map(single => (
             <MySingle key={single._id} single={single} handleDelete={handleDelete} />
           ))}

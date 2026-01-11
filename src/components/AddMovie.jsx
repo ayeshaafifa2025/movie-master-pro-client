@@ -101,13 +101,13 @@ const AddMovie = () => {
 
 <div className="grid grid-cols-2 gap-4">
 <div className="flex flex-col space-y-1">
-<label className="text-sm font-semibold text-gray-700">title</label>
+<label className="text-sm font-semibold text-black">title</label>
 <input type="text" name="title" placeholder="Movie Name" className="input input-bordered rounded-xl" required />
 </div>
 
 
 <div className="flex flex-col space-y-1">
-<label className="text-sm font-semibold text-gray-700">genre</label>
+<label className="text-sm font-semibold text-black">genre</label>
 <input type="text" name="genre" placeholder="genre" className="input input-bordered rounded-xl" required />
 </div>
 </div>
@@ -116,13 +116,13 @@ const AddMovie = () => {
 
 <div className="grid grid-cols-2 gap-4">
 <div className="flex flex-col space-y-1">
-<label className="text-sm font-semibold text-gray-700">Email</label>
+<label className="text-sm font-semibold text-black">Email</label>
 <input type="email" name="email" defaultValue={user.email} className="input input-bordered rounded-xl" readOnly required />
 </div>
 
 
 <div className="flex flex-col space-y-1">
-<label className="text-sm font-semibold text-gray-700">releaseYear</label>
+<label className="text-sm font-semibold text-black">releaseYear</label>
 <input type="text" name="releaseYear" placeholder="releaseYear" className="input input-bordered rounded-xl" required />
 </div>
 </div>
@@ -131,13 +131,13 @@ const AddMovie = () => {
 
 <div className="grid grid-cols-2 gap-4">
 <div className="flex flex-col space-y-1">
-<label className="text-sm font-semibold text-gray-700">posterUrl</label>
+<label className="text-sm font-semibold text-black">posterUrl</label>
 <input type="text" name="posterUrl" placeholder="posterUrl" className="input input-bordered rounded-xl" required />
 </div>
 
 
 <div className="flex flex-col space-y-1">
-<label className="text-sm font-semibold text-gray-700">director</label>
+<label className="text-sm font-semibold text-black">director</label>
 <input type="text" name="director" placeholder="director" className="input input-bordered rounded-xl" required />
 </div>
 </div>
@@ -146,46 +146,46 @@ const AddMovie = () => {
 
 <div className="grid grid-cols-2 gap-4">
 <div className="flex flex-col space-y-1">
-<label className="text-sm font-semibold text-gray-700">rating</label>
+<label className="text-sm font-semibold text-black">rating</label>
 <input type="text" name="rating" placeholder="rating" className="input input-bordered rounded-xl" required />
 </div>
 
 
 <div className="flex flex-col space-y-1">
-<label className="text-sm font-semibold text-gray-700">cast</label>
+<label className="text-sm font-semibold text-black">cast</label>
 <input type="text" name="cast" placeholder="cast" className="input input-bordered rounded-xl" required />
 </div>
 </div>
 
 <div className="grid grid-cols-2 gap-4">
 <div className="flex flex-col space-y-1">
-<label className="text-sm font-semibold text-gray-700">duration</label>
+<label className="text-sm font-semibold text-black">duration</label>
 <input type="text" name="duration" placeholder="duration" className="input input-bordered rounded-xl" required />
 </div>
 
 
 <div className="flex flex-col space-y-1">
-<label className="text-sm font-semibold text-gray-700">plotSummary</label>
-<input type="text" name="plotSummary" placeholder="plotSummary" className="input input-bordered rounded-xl" required />
+<label className="text-sm font-semibold text-black">plotSummary</label>
+<input type="text"  name="plotSummary" placeholder="plotSummary" className="input input-bordered rounded-xl" required />
 </div>
 </div>
 
 <div className="grid grid-cols-2 gap-4">
 <div className="flex flex-col space-y-1">
-<label className="text-sm font-semibold text-gray-700">language</label>
+<label className="text-sm font-semibold text-black">language</label>
 <input type="text" name="language" placeholder="language" className="input input-bordered rounded-xl" required />
 </div>
 
 
 <div className="flex flex-col space-y-1">
-<label className="text-sm font-semibold text-gray-700">country</label>
+<label className="text-sm font-semibold text-black">country</label>
 <input type="text" name="country" placeholder="country" className="input input-bordered rounded-xl" required />
 </div>
 </div>
 
 <div className="grid grid-cols-1 gap-4">
 <div className="flex flex-col space-y-1">
-<label className="text-sm font-semibold text-gray-700">createdAt</label>
+<label className="text-sm font-semibold text-black">createdAt</label>
 <input type="text" name="createdAt" placeholder="createdAt" className="input input-bordered rounded-xl" required />
 </div>
 </div>
@@ -203,7 +203,7 @@ const AddMovie = () => {
 }
       <div className='mt-10'> 
         <button  className='btn  btn-primary text-white'>
-    <Link to={"/my-collection"}>
+    <Link to={"/dashboard/my-collection"}>
     Go To Your Collection
 
     </Link>   

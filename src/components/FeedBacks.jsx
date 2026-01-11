@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// import Container from '../Container'; // আপনার Container কম্পোনেন্ট ইম্পোর্ট করুন
+// import Container from '../Container'; 
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -67,7 +67,7 @@ const FeedBacks = () => {
     const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <section className={`py-20 mb-5 ${theme === "light" ? " bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50" : "bg-gray-700 "} `}>
+    <section className={`py-20 mb-5 ${theme === "light" ? "bg-gray-100" : "bg-gray-400"} `}>
 {/*       <Container> */}
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${theme === "light" ? "text-gray-900" : "text-white"}`}>
           What Our Viewers Say
@@ -83,7 +83,7 @@ const FeedBacks = () => {
             1024: { slidesPerView: 3 },
           }}
           autoplay={{
-            delay: 3500, // ডিলে সামান্য বাড়ানো হলো
+            delay: 3500, 
             disableOnInteraction: false,
           }}
           pagination={{ clickable: true }}

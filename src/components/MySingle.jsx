@@ -6,7 +6,10 @@ const MySingle = ({ single, handleDelete }) => {
   return (
 
 
-<div className="max-w-sm h-full flex flex-col rounded overflow-hidden shadow-lg m-4 bg-gray-300 p-6">
+<div className="flex flex-col w-full rounded-lg overflow-hidden shadow-xl 
+                       bg-base-200 text-base-content
+                       transition duration-300 ease-in-out transform hover:scale-[1.03] hover:shadow-2xl 
+                       p-2">
   <img
     className="w-full h-60 object-cover rounded-xl"
     src={single.posterUrl}
@@ -14,11 +17,11 @@ const MySingle = ({ single, handleDelete }) => {
   />
 
   <div className="py-4 flex-grow">
-    <div className="font-bold text-xl text-red-500 mb-2">
-      Movie Name: {single.title}
+    <div className="font-bold text-xs  mb-2">
+      {single.title}
     </div>
-    <p className="font-bold text-xl mb-2">Category: {single.genre}</p>
-    <p className="font-bold text-xl mb-2">Rating: {single.rating} ⭐</p>
+    <p className="text-xs mb-2">{single.genre}</p>
+    <p className="text-xs mb-2">{single.rating} ⭐</p>
   </div>
 
   <div className="flex justify-between mt-auto">

@@ -1,7 +1,7 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import NavBar from './NavBar';
-import Footer from './Footer';
+// import Footer from './Footer';
 import { Link } from 'react-router';
 
 const MyCollectionCard = ({findMovie}) => {
@@ -106,7 +106,7 @@ const MyCollectionCard = ({findMovie}) => {
 
    </div>
 
-   <Footer></Footer>
+   {/* <Footer></Footer> */}
 
 </div>
 

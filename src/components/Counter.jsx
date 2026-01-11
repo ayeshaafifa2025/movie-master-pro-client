@@ -12,7 +12,7 @@ const Counter = ({data,userCountPromise}) => {
     return (
       
       <div className={`py-5 mb-2 rounded-xl  ${theme === "light" ? "bg-gray-100" : "bg-gray-400"}`}>
-        <h1 className='text-3xl  text-center text-black font-bold' >Our Total Movies And Users
+        <h1 className='text-3xl  text-center text-black font-bold' >Total Movies And Users
                 </h1>
               <div className="grid grid-cols-1  px-20 py-5 gap-20 my-[50px]">
                

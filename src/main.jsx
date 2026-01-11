@@ -6,9 +6,11 @@ import router from './routes/router.jsx'
 import AuthProvider from './provider/AuthProvider.jsx'
 import { ToastContainer } from 'react-toastify';
 import AOS from 'aos';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import 'aos/dist/aos.css';
 import ThemeProvider from './Layouts/ThemeProvider.jsx'
 
+const queryClient = new QueryClient()
 const Root = () => {
   useEffect(() => {
     AOS.init({
@@ -18,6 +20,7 @@ const Root = () => {
   }, []);
 
   return (
+    <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <AuthProvider>
       <RouterProvider router={router} />
@@ -25,6 +28,7 @@ const Root = () => {
     </AuthProvider>
 
     </ThemeProvider>
+    </QueryClientProvider>
     
   );
 };

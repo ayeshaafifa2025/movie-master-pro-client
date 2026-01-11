@@ -2,55 +2,54 @@ import React, { useContext } from 'react';
 // import Container from '../Container';
 import { ThemeContext } from '../Layouts/ThemeProvider';
 
-// ডেমো ডেটা: আপকামিং মুভির তথ্য 
+
 const upcomingMoviesData = [
     {
         _id: 'upc1',
-        title: 'Echoes of Time',
-        genre: 'Science Fiction',
+        title: 'RAMAYANA',
+        genre: 'Religious',
         release_date: 'April 2026',
-        poster: 'https://m.media-amazon.com/images/M/MV5BYjIzNTE5ZjktYTgxNS00OTRkLWE4NjYtYTVhMDJjYjQxNjhhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', // কাল্পনিক পোস্টার URL
+        poster: 'https://assets.gadgets360cdn.com/pricee/assets/product/202412/Ramayana_Part_1_Poster_1_1734431855.jpg',
     },
     {
         _id: 'upc2',
-        title: 'The Silent Witness',
+        title: 'The ODYSSEY',
         genre: 'Mystery, Thriller',
         release_date: 'May 2026',
-        poster: 'https://m.media-amazon.com/images/M/MV5BNDFlOTgxNmYtNGRiNy00NzIxLTg0YTItOGUzZmZmNGJkMjYwXkEyXkFqcGc@._V1_.jpg', // কাল্পনিক পোস্টার URL
+        poster: 'https://sahinduzgun.com/wp-content/uploads/2025/02/03-4.jpg', 
     },
     {
         _id: 'upc3',
-        title: 'Desert Wind',
-        genre: 'Adventure, Drama',
+        title: 'DIVORCE ME',
+        genre: 'Drama',
         release_date: 'June 2026',
-        poster: 'https://m.media-amazon.com/images/M/MV5BMjAzNTA0MzEwOV5BMl5BanBnXkFtZTYwMzA2Mjc5._V1_.jpg', // কাল্পনিক পোস্টার URL
+        poster: 'https://am-mediaa.com/wp-content/uploads/2025/12/Tallaani-Movie-768x960.webp', 
     },
     {
         _id: 'upc4',
-        title: 'City of Shadows',
-        genre: 'Detective',
-        release_date: 'July 2026',
-        poster: 'https://m.media-amazon.com/images/M/MV5BNjQ1OTFkNWQtMGM3Zi00MmY1LTlmNDUtMDg0OGZmOTlkNmJjXkEyXkFqcGc@._V1_.jpg', // কাল্পনিক পোস্টার URL
+        title: 'The voice of Hind Rajab',
+        genre: 'War',
+        release_date: 'July 2026', 
+        poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnn5XGUTuIyLhxXwMgqYlDvDDGVm0YiBJ89g&s',
     },
     {
         _id: 'upc5',
-        title: 'Royal Deceit',
-        genre: 'Historical',
+        title: 'HUMRAHI',
+        genre: 'Romance',
         release_date: 'August 2026',
-        poster: 'https://m.media-amazon.com/images/M/MV5BMjE0ODk5Mjc2Nl5BMl5BanBnXkFtZTcwNDE2ODUxMQ@@._V1_.jpg', // কাল্পনিক পোস্টার URL
+        poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7QEvC1W8a3aT4cgXUSgykylwWinyDc7Zgmg&s', 
     },
     {
         _id: 'upc6',
-        title: 'Zero Hour',
+        title: 'BORDER 2',
         genre: 'War, Action',
-        release_date: 'September 2026',
-        poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDXQWYcOsGX0ui0kmi-cYtW94W0p5bkgOMfw&s', // কাল্পনিক পোস্টার URL
+        release_date: 'JANUARY 2026',
+        poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaJzOMzi4eEST9gFUKr_k0SciFNfWtyiH-Vg&s', 
     },]
 
-// মুভি কার্ডের জন্য ডামি কম্পোনেন্ট (আপনার আসল Movie কম্পোনেন্টের অনুরূপ হতে পারে)
+
 const UpcomingMovieCard = ({ movie }) => {
-    // এখানে আপনার Movie কম্পোনেন্টের মতো ডিজাইন ব্যবহার করুন,
-    // তবে শুধু প্রয়োজনীয় তথ্য (টাইটেল, জেনর, রিলিজ ডেট) দেখানো উচিত।
+
     return (
         <div className="rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-2xl hover:scale-[1.02] bg-white dark:bg-gray-700">
             <img src={movie.poster} alt={movie.title} className="w-full h-48 object-cover"/>
@@ -60,7 +59,7 @@ const UpcomingMovieCard = ({ movie }) => {
                 <p className="text-xs font-bold text-indigo-600 dark:text-indigo-400 mt-2">
                     Releasing: {movie.release_date}
                 </p>
-                {/* ডিটেইলস বাটনটি প্রয়োজন নাও হতে পারে, কারণ মুভিটি এখনো রিলিজ হয়নি */}
+              
             </div>
         </div>
     );
@@ -70,7 +69,7 @@ const UpcomingReleases = () => {
     const { theme } = useContext(ThemeContext);
 
     return (
-        <section className={`py-16 ${theme === 'light' ? 'bg-gray-50' : 'bg-gray-800'}`}>
+        <section className={`py-16 mb-2 ${theme === 'light' ? 'bg-gray-100' : 'bg-gray-400'}`}>
             {/* <Container> */}
                 <h2 className={`text-3xl font-extrabold text-center mb-10 ${theme === 'light' ? 'text-gray-900' : 'text-white'}`}>
                     🎬 Coming Soon to FilmFusion Pro

@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../Layouts/ThemeProvider";
 
 const Contact = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   return (
     <section
-      style={{
-        maxWidth: "800px",
-        margin: "40px auto",
-        fontFamily: "Arial, sans-serif",
-        lineHeight: 1.6,
-      }}
+      className={` ${theme === "light" ? "bg-gray-100" : "bg-gray-400"} mx-auto p-6 space-y-6 font-sans text-gray-800`}
     >
       <h1 style={{ fontSize: "32px", marginBottom: "20px" }}> Contact Us</h1>
 

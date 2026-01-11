@@ -19,9 +19,9 @@ const Footer = () => {
       <div>
         <h3 className="text-xl font-bold text-black mb-3">FilmFusion Pro</h3>
         <p className="text-black text-sm">
-  Discover meaningful, family-friendly, and inspiring films from around the world.
-  FilmFusion Pro helps you explore movies with clean details, safe content insights,
-  and your own personalized collection — all in one place.
+  Discover meaningful, family-friendly,<br /> and inspiring films from around the world. <br />
+  FilmFusion Pro helps you explore movies with <br /> clean details, safe content insights,
+  and your own <br />personalized collection — all in one place.
 </p>
 
         </div>
@@ -48,19 +48,19 @@ const Footer = () => {
         <h3 className="text-xl font-bold mb-3 text-black">Follow Us</h3>
         <div className="flex flex-col space-y-2 text-gray-400">
           <div className='flex '>
-            <button className='mr-3'><FaFacebookSquare /></button>
+            <button className='mr-3 bg-black'><FaFacebookSquare /></button>
             <a href="https://facebook.com" className="text-black ">Facebook</a>
           </div>
           <div className='flex'>
-            <button className='mr-3'><FaInstagramSquare /></button>
+            <button className='mr-3 bg-black'><FaInstagramSquare /></button>
             <a href="https://instagram.com" className="text-black ">Instagram</a>
           </div>
           <div className='flex'>
-            <button className='mr-3'><FaXTwitter /></button>
+            <button className='mr-3 bg-black'><FaXTwitter /></button>
             <a href="https://twitter.com" className="text-black ">X</a>
           </div>
           <div className='flex'>
-            <button className='mr-3'><IoLogoYoutube /></button>
+            <button className='mr-3 bg-black'><IoLogoYoutube /></button>
             <a href="https://youtube.com" className="text-black ">YouTube</a>
           </div>
    
@@ -72,7 +72,7 @@ const Footer = () => {
 
     </div>
     
-    <div className="mt-10 border-t border-gray-700 pt-4 text-center text-gray-100 text-sm">
+    <div className="mt-10 border-t border-gray-700 pt-4 text-center text-black text-sm">
       &copy; {new Date().getFullYear()} FilmFusion Pro. All rights reserved.
     </div>
   </div>

@@ -1,87 +1,19 @@
-// import React, { useContext } from "react";
-// import { toast } from "react-toastify";
-// import { useNavigate } from 'react-router';
-// import { AuthContext } from '../provider/AuthContext';
-
-// const MyProfile = () => {
-//   const { user, logOut } = useContext(AuthContext);
-//   
-//   const navigate = useNavigate();
-
-//   if (!user) {
-//     return <div className="min-h-screen flex items-center justify-center"><progress className="progress w-56"></progress></div>;
-//   }
-
-//   const handleLogout = () => {
-//     logOut()
-//       .then(() => {
-//         toast.success("Logged out successfully");
-//         navigate('/');
-//       })
-//       .catch(() => {
-//         toast.error("Failed to logout");
-//       });
-//   };
-
-//   return (
-//     <div className="min-h-full flex items-center justify-center">
-//       <div className="card bg-base-100 shadow-xl w-full max-w-md p-6 text-center">
-//         
-//         <img
-//           src={user?.photoURL || "https://i.ibb.co/6P0w7GZ/default-avatar.png"}
-//           alt="Profile"
-//           className="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-primary"
-//         />
-
-//         <h2 className="text-2xl font-semibold mb-1">
-//           {user?.displayName || "User Name N/A"}
-//         </h2>
-
-//         <p className="text-gray-600 mb-6">{user?.email || "Email N/A"}</p>
-//         
-//         <button
-//           onClick={handleLogout}
-//           className="
-//                 text-black bg-gradient-to-r from-purple-300 via-cyan-200 to-teal-300
-//                 px-6 py-3.5 
-//                 rounded-xl 
-//                 font-medium shadow-lg transition-all duration-300 w-full
-//                 hover:shadow-xl hover:scale-[1.02] 
-//                 hover:from-purple-300 hover:via-cyan-300 hover:to-teal-400
-//             "
-//         >
-//           Logout
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default MyProfile;
-
-
-
-
 import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../provider/AuthContext';
 
 const MyProfile = () => {
-    // AuthContext থেকে user, logOut, এবং updateUser (নতুন) অ্যাক্সেস করা হলো
     const { user, logOut, updateUser, setUser } = useContext(AuthContext);
     const navigate = useNavigate();
     
-    // এডিট মোড স্টেট
     const [isEditing, setIsEditing] = useState(false);
     
-    // ফর্ম ডেটা স্টেট
     const [displayName, setDisplayName] = useState(user?.displayName || '');
     const [photoURL, setPhotoURL] = useState(user?.photoURL || '');
     const [updateLoading, setUpdateLoading] = useState(false);
 
     if (!user) {
-        // user লোড না হওয়া পর্যন্ত loading state দেখানো
         return <div className="min-h-screen flex items-center justify-center"><progress className="progress w-56"></progress></div>;
     }
 
@@ -102,17 +34,14 @@ const MyProfile = () => {
 
         const updatedData = {};
 
-        // যদি নাম পরিবর্তন করা হয়
         if (displayName !== user?.displayName) {
             updatedData.displayName = displayName;
         }
 
-        // যদি ছবি পরিবর্তন করা হয়
         if (photoURL !== user?.photoURL) {
             updatedData.photoURL = photoURL;
         }
         
-        // যদি কোনো তথ্য পরিবর্তন না হয়
         if (Object.keys(updatedData).length === 0) {
             toast.info("No changes detected.");
             setIsEditing(false);
@@ -120,14 +49,11 @@ const MyProfile = () => {
             return;
         }
 
-        // Firebase-এ আপডেট করা
         updateUser(updatedData)
             .then(() => {
-                // স্টেট আপডেট: Firebase আপডেট হওয়ার পর, AuthContext-এর user স্টেট ম্যানুয়ালি আপডেট করা হলো
-                // এটি UI তে দ্রুত পরিবর্তন দেখাতে সাহায্য করে
                 setUser({ ...user, ...updatedData }); 
                 toast.success("Profile updated successfully!");
-                setIsEditing(false); // এডিট মোড বন্ধ করা হলো
+                setIsEditing(false);
             })
             .catch((error) => {
                 console.error("Profile update failed:", error);
@@ -138,7 +64,6 @@ const MyProfile = () => {
             });
     };
     
-    // এডিট মোড শুরু করার জন্য, বর্তমান ডেটা দিয়ে স্টেট সেট করা হলো
     const startEditing = () => {
         setDisplayName(user?.displayName || '');
         setPhotoURL(user?.photoURL || '');
@@ -157,7 +82,6 @@ const MyProfile = () => {
                 />
 
                 {!isEditing ? (
-                    // Read Mode
                     <>
                         <h2 className="text-2xl font-semibold mb-1">
                             {user?.displayName || "User Name N/A"}
@@ -172,7 +96,6 @@ const MyProfile = () => {
                         </button>
                     </>
                 ) : (
-                    // Edit Mode
                     <form onSubmit={handleUpdateProfile} className="text-left space-y-4">
                         
                         <div>
@@ -225,7 +148,6 @@ const MyProfile = () => {
                 
                 <div className="divider my-4"></div>
                 
-                {/* Logout Button */}
                 <button
                     onClick={handleLogout}
                     className="

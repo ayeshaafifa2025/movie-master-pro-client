@@ -77,7 +77,7 @@ const UpdateMovie = () => {
     return (
         <Container>
 {/* <div className=''> */}
- <div className={` ${theme === 'light' ? 'bg-gray-100  ' : 'bg-gray-400'}`}>
+ <div className={`py-10 px-10 ${theme === 'light' ? 'bg-gray-100  ' : 'bg-gray-400'}`}>
           
             <div>
         <NavBar></NavBar>
@@ -194,13 +194,13 @@ const UpdateMovie = () => {
         </main>)
        }
         <button  className='btn btn-primary'>
-    <Link to={"/my-collection"}>
+    <Link to={"/dashboard/my-collection"}>
     Go To Your Collection
 
     </Link>   
                         </button>
 
-        <Footer></Footer>
+        {/* <Footer></Footer> */}
 
         </div>
             

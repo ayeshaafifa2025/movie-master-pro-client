@@ -1,20 +1,19 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { PieChart, Pie, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 import { Link } from 'react-router';
-import { AuthContext } from '../provider/AuthContext'; // আপনার AuthContext
-import { ThemeContext } from '../Layouts/ThemeProvider'; // আপনার ThemeContext
+import { AuthContext } from '../provider/AuthContext';
+import { ThemeContext } from '../Layouts/ThemeProvider';
 
 
 import Loading from './Loading';
 import Container from '../components/Container';
 
-// পাই চার্টের রঙের জন্য রং
 const PIE_COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#0088FE', '#00C49F', '#FF00FF', '#00FF00'];
-const BASE_URL = 'https://movie-master-pro-server-six.vercel.app'; // আপনার সার্ভারের Base URL
+const BASE_URL = 'https://movie-master-pro-server-six.vercel.app';
 
 const UserDashboardHome = () => {
     const { theme } = useContext(ThemeContext);
-    const { user, loading: authLoading } = useContext(AuthContext); // AuthContext থেকে user এবং loading
+    const { user, loading: authLoading } = useContext(AuthContext);
 
     const [stats, setStats] = useState({
         totalCollection: 0,
@@ -25,7 +24,6 @@ const UserDashboardHome = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // --- ডেটা ফেচিং লজিক (useEffect ব্যবহার করে) ---
     useEffect(() => {
         if (authLoading) return;
         
@@ -39,7 +37,6 @@ const UserDashboardHome = () => {
             setError(null);
             
             try {
-                // নতুন সিঙ্গেল ড্যাশবোর্ড স্ট্যাটস এন্ডপয়েন্ট কল করা
                 const res = await fetch(`${BASE_URL}/user/dashboard-stats?email=${user.email}`);
                 
                 if (!res.ok) {
@@ -48,11 +45,10 @@ const UserDashboardHome = () => {
                 
                 const data = await res.json();
                 
-                // Genre ডেটাকে PieChart ফরম্যাটে পরিবর্তন করা
                 const formattedGenreStats = data.genreStats.map(item => ({
-                    name: item._id || "Unspecified", // Null/Empty ID থাকলে "Unspecified" ব্যবহার করা
+                    name: item._id || "Unspecified",
                     value: item.count,
-                })).filter(item => item.value > 0); // Count 0 হলে বাদ দেওয়া
+                })).filter(item => item.value > 0);
 
                 setStats({
                     totalCollection: data.totalCollection,
@@ -83,7 +79,6 @@ const UserDashboardHome = () => {
     const { totalCollection, totalWatchlist, genreStats, recentWatched } = stats;
     const totalUniqueGenres = genreStats.length;
 
-    // --- JSX রেন্ডারিং ---
     return (
         <Container>
             <div className={`p-4 sm:p-6 lg:p-8 ${theme === "light" ? "bg-white" : "bg-gray-800 text-gray-100"} min-h-screen transition-colors duration-300`}>
@@ -91,10 +86,8 @@ const UserDashboardHome = () => {
                     Dashboard Overview 📊
                 </h1>
 
-                {/* --- 1. Overview Cards --- */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                     
-                    {/* Total Movies */}
                     <div className={`stat shadow-2xl rounded-xl p-6 border-b-4 border-indigo-500 ${theme === "light" ? "bg-gray-50 text-base-content" : "bg-gray-700 text-white"}`}>
                         <div className="stat-title text-gray-500 font-medium text-sm sm:text-base">My Collection</div>
                         <div className="stat-value text-3xl sm:text-4xl text-indigo-500 font-extrabold">{totalCollection}</div>
@@ -102,7 +95,6 @@ const UserDashboardHome = () => {
                         <Link to="/dashboard/my-collection" className="text-xs text-indigo-400 hover:underline mt-2 inline-block">View Details</Link>
                     </div>
                     
-                    {/* Total Watched */}
                     <div className={`stat shadow-2xl rounded-xl p-6 border-b-4 border-green-500 ${theme === "light" ? "bg-gray-50 text-base-content" : "bg-gray-700 text-white"}`}>
                         <div className="stat-title text-gray-500 font-medium text-sm sm:text-base">Total Watchlist</div>
                         <div className="stat-value text-3xl sm:text-4xl text-green-500 font-extrabold">{totalWatchlist}</div>
@@ -110,7 +102,6 @@ const UserDashboardHome = () => {
                         <Link to="/dashboard/watched" className="text-xs text-green-400 hover:underline mt-2 inline-block">View Details</Link>
                     </div>
                     
-                    {/* Total Unique Genres */}
                     <div className={`stat shadow-2xl rounded-xl p-6 border-b-4 border-amber-500 ${theme === "light" ? "bg-gray-50 text-base-content" : "bg-gray-700 text-white"}`}>
                         <div className="stat-title text-gray-500 font-medium text-sm sm:text-base">Unique Genres</div>
                         <div className="stat-value text-3xl sm:text-4xl text-amber-500 font-extrabold">{totalUniqueGenres}</div>
@@ -122,7 +113,6 @@ const UserDashboardHome = () => {
                 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
 
-                    {/* --- 2. Dynamic Charts (Genre Distribution Pie Chart) --- */}
                     <div className={`lg:col-span-1 p-4 sm:p-6 rounded-xl shadow-2xl ${theme === "light" ? "bg-white" : "bg-gray-700"}`}>
                         <h3 className={`text-lg sm:text-xl font-semibold mb-4 text-center ${theme === "light" ? "text-gray-700" : "text-white"}`}>Genre Distribution</h3>
                         {genreStats.length > 0 ? (
@@ -138,7 +128,7 @@ const UserDashboardHome = () => {
                                         innerRadius={50} 
                                         paddingAngle={5}
                                         labelLine={false}
-                                        label={({ name, percent }) => percent > 0.05 ? `${name} (${(percent * 100).toFixed(0)}%)` : ''} // Only label if > 5%
+                                        label={({ name, percent }) => percent > 0.05 ? `${name} (${(percent * 100).toFixed(0)}%)` : ''}
                                     >
                                         {genreStats.map((entry, index) => (
                                             <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
@@ -151,12 +141,14 @@ const UserDashboardHome = () => {
                         ) : (
                             <p className="text-center text-gray-500 py-10">Add movies to your collection to see the chart. 
 
+
+
 [Image of Pie Chart]
+
 </p>
                         )}
                     </div>
 
-                    {/* --- 3. Dynamic Data Table (Recent Watchlist Activity) --- */}
                     <div className={`lg:col-span-2 p-4 sm:p-6 rounded-xl shadow-2xl overflow-x-auto ${theme === "light" ? "bg-white" : "bg-gray-700"}`}>
                         <h3 className={`text-lg sm:text-xl font-semibold mb-4 ${theme === "light" ? "text-gray-700" : "text-white"}`}>Recent Watchlist Activity</h3>
                         
@@ -173,7 +165,6 @@ const UserDashboardHome = () => {
                                 </thead>
                                 <tbody>
                                     {recentWatched.map((item, index) => (
-                                        // item.movie, item.user, item.movieId, item.photo Watched কম্পোনেন্ট থেকে আসছে
                                         <tr key={item._id} className={`${theme === "light" ? "hover:bg-gray-50 border-b" : "hover:bg-gray-600 border-gray-600 border-b"}`}>
                                             <th>{index + 1}</th>
                                             <td className='font-medium'>{item.movie}</td> 
@@ -197,7 +188,6 @@ const UserDashboardHome = () => {
                     </div>
                 </div>
 
-                {/* --- Quick Actions --- */}
                 <div className="mt-8 sm:mt-10 text-center">
                     <h3 className={`text-xl font-bold mb-4 ${theme === "light" ? "text-gray-800" : "text-white"}`}>Quick Actions</h3>
                     <div className="flex flex-wrap justify-center space-x-3 sm:space-x-4 space-y-2 sm:space-y-0">
@@ -214,4 +204,5 @@ const UserDashboardHome = () => {
     );
 };
 
-export default UserDashboardHome;
+export default UserDashboardHome
+;

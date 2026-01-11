@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Outlet } from 'react-router';
 import NavBar from './NavBar';
-import Footer from './Footer';
+// import Footer from './Footer';
 import Container from './Container';
 
 
@@ -18,7 +18,7 @@ const QuickLinks = () => {
 
             </main>
             
-            <Footer></Footer>
+            {/* <Footer></Footer> */}
         </div>
 
         </Container>

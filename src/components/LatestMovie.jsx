@@ -1,37 +1,4 @@
-// import React from 'react';
-// import { Link } from 'react-router';
 
-// const LatestMovie = ({Latest}) => {
-//     const{_id,posterUrl,title,rating,genre,createdAt,
-// language}= Latest;
-//     return (
-//         <div>
-//     <div className="max-w-sm h-full flex flex-col rounded overflow-hidden shadow-lg m-4 bg-pink-200 p-6">
-//   <img
-//     className="w-full h-60 object-cover rounded-xl"
-//     src={Latest.posterUrl}
-//     alt={Latest.title}
-//   />
-//   <div className="py-4 flex-grow">
-//     <div className="text-base">
-//        {Latest.title}
-//     </div>
-//     <p className="text-base"> {Latest.genre}</p>
-//     <p className="text-base"> {Latest.rating} ⭐</p>
-//     <p className="text-base"> {Latest.language}</p>
-//     <p className="text-base"> {Latest.createdAt}</p>
-//   </div>
-//   <button className="btn btn-primary text-white mt-auto">
-//     <Link to={`/movies/${_id}`}>View Details</Link>
-//   </button>
-
-// </div>
-
-//         </div>
-//     );
-// };
-
-// export default LatestMovie;
 
 import React from 'react';
 import { Link } from 'react-router';

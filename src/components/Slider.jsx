@@ -2,57 +2,52 @@
 
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// CSS আমদানি করুন
 import 'swiper/css';
 import 'swiper/css/navigation';
-// ⚠️ Pagination এর জন্য নতুন CSS আমদানি
 import 'swiper/css/pagination'; 
-// ⚠️ Cards Effect এর জন্য CSS আমদানি
 import 'swiper/css/effect-cards'; 
-
-// ⚠️ EffectCards মডিউল আমদানি করুন
 import { Navigation, Pagination, Autoplay, EffectCards } from 'swiper/modules';
 
 const Slider = ({slides}) => {
     
+ 
+    const handleScroll = () => {
+        
+        document.getElementById('next-section').scrollIntoView({ behavior: 'smooth' });
+    };
+
     return (
-        <div className="py-12">
+        <div className="py-12 relative"> 
             <Swiper
-                // মডিউল
-                modules={[Navigation, Pagination, Autoplay, EffectCards]}
+                 modules={[Navigation, Pagination, Autoplay, EffectCards]}
+                 effect={'cards'} 
                 
-                // ইফেক্ট: Cards
-                effect={'cards'} 
-                
-                // Cards সেটিংস
-                effectCards={{
-                    perSlideOffset: 20, // অফসেট বাড়ানো হলো যাতে কার্ডগুলো আরও দূরে থাকে
-                    perSlideRotate: 6, // ঘোরার ডিগ্রি বাড়ানো হলো
+                 effectCards={{
+                    perSlideOffset: 20, 
+                    perSlideRotate: 6, 
                     rotate: true,
                     slideShadows: true,
-                }}
+                 }}
                 
-                // স্লাইড সেটিংস
-                grabCursor={true}
-                slidesPerView={1} 
+                 grabCursor={true}
+                 slidesPerView={1} 
                 
-                // Navigation (Arrow)
-                navigation
+               
+                 navigation
                 
-                // ⚠️ Advanced Pagination: Fraction
-                pagination={{ 
-                    type: 'fraction', // এই টাইপটি (1/10, 2/10) দেখাবে, যা খুব প্রফেশনাল
-                    el: '.swiper-pagination-fraction', // নিচে অতিরিক্ত কাস্টম ক্লাস যোগ করা হয়েছে
+                
+                 pagination={{ 
+                    type: 'fraction', 
+                    el: '.swiper-pagination-fraction', 
                     clickable: true 
-                }}
+                 }}
                 
-                autoplay={{ delay: 1000, disableOnInteraction: false }}
-                loop={true}
+                 autoplay={{ delay: 1000, disableOnInteraction: false }}
+                 loop={true}
             >
                 {slides.map((slide, index) => (
                     <SwiperSlide key={index}>
-                        {/* পোস্টার কন্টেইনার */}
+                         
                         <div className="flex justify-center items-center h-[500px] lg:h-[600px] rounded-lg overflow-hidden shadow-2xl">
                             <img
                                 src={slide.posterUrl}
@@ -64,14 +59,37 @@ const Slider = ({slides}) => {
                 ))}
             </Swiper>
             
-            {/* ⚠️ অ্যাডভান্সড ফ্র্যাকশন পেজিনেশন দেখানোর জন্য কাস্টম এলিমেন্ট */}
             <div className="swiper-pagination-fraction text-center mt-6 font-semibold text-xl text-primary"></div>
+           
+            <div 
+                className="absolute left-1/2 transform -translate-x-1/2 cursor-pointer" 
+                style={{ bottom: '-60px', zIndex: 10 }} 
+            >
+                <button
+                    onClick={handleScroll}
+                    title="Scroll Down to Explore"
+
+                    className="p-3 text-white bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300 flex flex-col items-center overflow-hidden"
+                >
+                  
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" 
+                         className="w-6 h-6 animate-[bounce_1.5s_infinite]" // কাস্টম অ্যানিমেশন ক্লাস
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                    {/* দ্বিতীয় তীর: সামান্য দেরিতে বাউন্স করবে (ঐচ্ছিক, সৌন্দর্যের জন্য) */}
+                    {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" 
+                         className="w-6 h-6 -mt-3 animate-[bounce_1.5s_infinite_0.5s]" 
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
+                    </svg> */}
+                </button>
+            </div>
+
 
         </div>
     );
 };
 
 export default Slider;
-
-
 

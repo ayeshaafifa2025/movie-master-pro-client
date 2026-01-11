@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../Layouts/ThemeProvider';
 
 const Privacy = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   return (
-    <div className="max-w-3xl mx-auto bg-amber-100 p-6 space-y-6 font-sans text-gray-800">
+    <div className={`max-w-3xl py-10 ${theme === "light" ? "bg-gray-100" : "bg-gray-400"} mx-auto  p-6 space-y-6 font-sans text-gray-800`}>
       <h1 className="text-3xl font-bold">Privacy Policy</h1>
       
       <p>

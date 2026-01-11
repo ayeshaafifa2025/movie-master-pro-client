@@ -117,11 +117,15 @@ const router = createBrowserRouter(
         loader:()=>fetch("https://movie-master-pro-server-six.vercel.app/movies"),
         path:"/movies",
         element:<AllMovies></AllMovies>
-        
-           
-        
+    
+    }
 
-    },
+   
+
+
+    
+
+    ,
      
     
    

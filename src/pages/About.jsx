@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../Layouts/ThemeProvider';
 
 
 const About = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
     return (
-        <div className='max-w-3xl bg-amber-100 mx-auto p-6 space-y-6 font-sans text-gray-800">
-      // <h1 className="text-3xl font-bold">Privacy Policy</h1>'>
+        <div className={`max-w-3xl ${theme === "light" ? "bg-gray-100" : "bg-gray-400"} mx-auto p-6 space-y-6 font-sans text-gray-800`}>
+    
 <h2 className="text-2xl font-bold mb-3 text-purple-600">About Us</h2>
 
 <p className="text-gray-700 leading-relaxed mb-4">
